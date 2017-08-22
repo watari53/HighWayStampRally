@@ -2,7 +2,9 @@
 
 var DUMMY_IMAGE = "./images/no-image.jpg";
 
+var app = {};
 ons.bootstrap()
+
     .factory('DataService', function($http) {
         var service = {};
         //                 service.data = {
@@ -285,14 +287,13 @@ ons.bootstrap()
             console.log("写真を取得できませんでした。")
         }
 
-        $scope.stamp_camera = function() {
+        function stamp_camera() {
             getPictureFromCamera(onSuccess);
-        };
+        }
 
-        $scope.stamp_gallery = function() {
+        function stamp_gallery() {
             getPictureFromGallery(onSuccess);
-        };
-
+        }
 
         // update facility data
         $scope.checkin_submit = function() {
@@ -305,8 +306,39 @@ ons.bootstrap()
                     facility: $scope.facility,
                     when_visit_flg: true
                 }
-            })
-        }
+            });
+        };
+        // action sheet which selet picture from camera or gallery
+        var CAMERA_INDEX = 0;
+        var GALLERY_INDEX = 1;
+        app.showFromObject = function () {
+          ons.openActionSheet({
+            title: 'スタンプ用画像の撮影',
+            cancelable: true,
+            buttons: [
+              {
+                  label: 'カメラで撮影',
+                  icon: 'md-camera',
+              },
+              {
+                label: 'ギャラリーから選択',
+                icon: 'fa-picture-o',
+              },
+              {
+                label: 'Cancel',
+                icon: 'md-close'
+              }
+            ]
+          }).then(function (index) {
+              console.log('index: ' + index);
+              if (index == CAMERA_INDEX) {
+                  stamp_camera();
+              } else if (index == GALLERY_INDEX) {
+                  stamp_gallery();
+              }
+          });
+        };
+
     })
     .controller('MapController', function(DataService) {
         // map

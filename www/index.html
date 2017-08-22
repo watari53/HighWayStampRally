@@ -32,8 +32,14 @@
                 <ons-splitter-side side="left" width="220px" collapse swipeable>
                     <ons-page>
                         <ons-list>
-                            <ons-list-item ng-click="app.load('home.html')" tappable>
+                            <ons-list-header>Menu</ons-list-header>
+                            <ons-list-item ng-click="app.load('home.html')" tappable>
+                              <div class="left">
+                                <ons-icon icon="md-home" class="list-item__icon"></ons-icon>
+                              </div>
+                              <div class="center">
                                 ホーム
+                              </div>
                             </ons-list-item>
                             <ons-list-item ng-click="app.load('collection.html')" tappable>
                                 スタンプラリー
@@ -118,25 +124,25 @@
             </ons-toolbar>
 
             <p>チェックインする施設を選択します</p>
-            <div id="check-in-map" style="height: 50%; position: relative;" tabindex="0">
+            <div id="check-in-map" style="height: 40%; position: relative;" tabindex="0">
             </div>
 
             <ons-row style="margin-top: 20px;">
                 <ons-col>
                     <div class="card" style="background-image: url({{image_url}});"> </div>
-
                 </ons-col>
 
                 <ons-col>
-                    <ons-button class="stump-button" modifier="large--ta" ng-click="stamp_camera()">カメラを起動</ons-button>
-                    <ons-button class="stump-button" modifier="large--ta" ng-click="stamp_gallery()">ギャラリーから選ぶ</ons-button>
+                    <ons-button onclick="app.showFromObject()">画像を登録する</ons-button>
                 </ons-col>
             </ons-row>
 
             <div style="margin-top: 20px; padding: 20px;">
                 <ons-button id="check-in-btn" ng-click="checkin_submit()" modifier="large" disabled="true">チェックイン</ons-button>
             </div>
+
         </ons-page>
+    
     </ons-template>
 
     <ons-template id="press_stamp.html">
