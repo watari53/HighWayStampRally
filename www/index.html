@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * 'unsafe-inline' data: content:">
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="components/loader.js"></script>
+    <script src="lib/onsenui/js/onsenui.min.js"></script>
+    <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+    <script src="components/main.js"></script>
+
+
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        ons.ready(function() {
+            console.log("Onsen UI is ready!");
+        });
+    </script>
+</head>
+
+<body>
+
+    <ons-navigator id="nav" var="nav" page="home.html">
+        <ons-page>
+            <ons-splitter ng-controller="AppController as app" var="splitter">
+                <ons-splitter-side side="left" width="220px" collapse swipeable>
+                    <ons-page>
+                        <ons-list>
+                            <ons-list-item ng-click="app.load('home.html')" tappable>
+                                ホーム
+                            </ons-list-item>
+                            <ons-list-item ng-click="app.load('collection.html')" tappable>
+                                スタンプラリー
+                            </ons-list-item>
+                            <ons-list-item ng-click="app.load('map.html')" tappable>
+                                スタンプ施設マップ
+                            </ons-list-item>
+                        </ons-list>
+                    </ons-page>
+                </ons-splitter-side>
+                <ons-splitter-content page="home.html"></ons-splitter-content>
+            </ons-splitter>
+        </ons-page>
+    </ons-navigator>
+
+    <ons-template id="home.html">
+        <ons-page ng-controller="HomeController">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="app.toggle()">
+                        <ons-icon icon="md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">
+                    ホーム
+                </div>
+            </ons-toolbar>
+            <div class="content" style="text-align: center">
+                <img id="top-image" src="images/top-image.jpg"></img>
+                <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+                    高速道路のSA・PAで
+                    <br>旅の思い出をあつめませんか？
+                </p>
+                <ons-list>
+                    <ons-list-header>Menu</ons-list-header>
+                    <ons-list-item modifier="chevron" ng-click="check_in()">
+                        <div class="left">
+                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                        </div>
+                        <div class="center">
+                            <span class="list-item__title">チェックイン</span>
+                            <span class="list-item__subtitle">チェックインしてスタンプを記録</span>
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('collection.html')">
+                        <div class="left">
+                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                        </div>
+                        <div class="center">
+                            <span class="list-item__title">スタンプ帳</span>
+                            <span class="list-item__subtitle">取得したスタンプ一覧</span>
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('map.html')">
+                        <div class="left">
+                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                        </div>
+                        <div class="center">
+                            <span class="list-item__title">施設マップ</span>
+                            <span class="list-item__subtitle">スタンプを設置している施設一覧</span>
+                        </div>
+                    </ons-list-item>
+                </ons-list>
+            </div>
+        </ons-page>
+    </ons-template>
+
+    <ons-modal var="getLocationModal">
+        位置情報を取得中・・・
+    </ons-modal>
+
+    <ons-template id="check_in.html">
+        <ons-page ng-controller="CheckInController">
+
+            <ons-toolbar>
+                <div class="left" style="line-height: 44px">
+                    <ons-back-button>Back</ons-back-button>
+                </div>
+                <div class="center">チェックイン</div>
+                <div class="right" style="line-height: 44px">
+                </div>
+            </ons-toolbar>
+
+            <p>チェックインする施設を選択します</p>
+            <div id="check-in-map" style="height: 50%; position: relative;" tabindex="0">
+            </div>
+
+            <ons-row style="margin-top: 20px;">
+                <ons-col>
+                    <div class="card" style="background-image: url({{image_url}});"> </div>
+
+                </ons-col>
+
+                <ons-col>
+                    <ons-button class="stump-button" modifier="large--ta" ng-click="stamp_camera()">カメラを起動</ons-button>
+                    <ons-button class="stump-button" modifier="large--ta" ng-click="stamp_gallery()">ギャラリーから選ぶ</ons-button>
+                </ons-col>
+            </ons-row>
+
+            <div style="margin-top: 20px; padding: 20px;">
+                <ons-button id="check-in-btn" ng-click="checkin_submit()" modifier="large" disabled="true">チェックイン</ons-button>
+            </div>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="press_stamp.html">
+        <ons-dialog style="height: 100%;" var="stamp_dialog" cancelable>
+
+            <ons-toolbar inline>
+                <div class="center">
+                    おめでとうございます！
+                </div>
+            </ons-toolbar>
+
+            <div style="text-align: center">
+                <p>
+                    スタンプをゲット！
+                </p>
+
+                <p>
+                    <ons-button onclick="stamp_dialog.hide()">Close</ons-button>
+                </p>
+            </div>
+        </ons-dialog>
+    </ons-template>
+
+    <ons-template id="collection.html">
+
+        <ons-page ng-controller="CollectionController">
+            <ons-toolbar>
+                <div class="left" style="line-height: 44px">
+                    <ons-back-button>Back</ons-back-button>
+                </div>
+                <div class="center">スタンプコレクション</div>
+                <div class="right" style="line-height: 44px">
+                </div>
+            </ons-toolbar>
+
+            <div class="content" style="text-align: center">
+                <ons-list>
+                    <ons-list-header> 全体グラフ </ons-list-header>
+                </ons-list>
+
+                <ons-list>
+                    <ons-list-header> 道路別制覇状況 </ons-list-header>
+
+                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('facilities.html', {data : {load: load}})" ng-repeat="load in loads">
+                        {{load.name}}
+                    </ons-list-item>
+                </ons-list>
+
+            </div>
+        </ons-page>
+    </ons-template>
+
+    <!-- facilities by road number -->
+    <ons-template id="facilities.html">
+        <ons-page ng-controller="FacilitiesController">
+
+            <ons-toolbar>
+                <div class="left" style="line-height: 44px">
+                    <ons-back-button>Back</ons-back-button>
+                </div>
+                <div class="center">{{load.name}}のSA・PA一覧</div>
+                <div class="right" style="line-height: 44px">
+                </div>
+            </ons-toolbar>
+
+            <ons-list>
+
+                <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='facility in facilities'>
+                    <ons-row ng-click="nav.pushPage('facility_detail.html', {data: {facility: facility}})">
+                        <ons-col width="30%">
+                            <!--<img src="{{facility.image_url}}" class="thumbnail">-->
+                            <div class="list-thumbnail" style="background-image: url({{facility.image_url}});"> </div>
+
+                        </ons-col>
+                        <ons-col>
+                            <div class="name">
+                                {{facility.name}}
+                            </div>
+                            <div class="location">
+                                <i class="fa fa-map-marker"></i> {{facility.expressway}}
+                            </div>
+                            <div class="desc">
+                                <i class="fa fa-calendar"></i> {{facility.visited}}
+                            </div>
+                        </ons-col>
+                        <ons-col width="40px"></ons-col>
+                    </ons-row>
+                </ons-list-item>
+
+            </ons-list>
+
+        </ons-page>
+    </ons-template>
+
+    <ons-template id='facility_detail.html'>
+        <ons-page modifier="shop-details" ng-controller='FacilityDetailController'>
+
+            <ons-toolbar>
+                <div class="left" style="line-height: 44px">
+                    <ons-back-button>Back</ons-back-button>
+                </div>
+                <div class="center">{{facility.name}}</div>
+
+                <div class="right" style="line-height: 44px">
+                </div>
+            </ons-toolbar>
+
+            <ons-list modifier="inset" style="margin-top: 10px">
+                <ons-list-item style="text-align: center">
+                    <div class="detail-image" style="background-image: url({{facility.image_url}});"> </div>
+                </ons-list-item>
+            </ons-list>
+
+            <ons-list modifier="inset" style="margin-top: 20px">
+                <ons-list-header class="title">Information</ons-list-header>
+                <ons-list-item>
+                    <div class="left">
+                        <ons-icon icon="fa-map-marker"></ons-icon>
+                    </div>
+                    <div class="center">
+                        {{facility.address}}
+
+                    </div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div class="left">
+                        <ons-icon icon="fa-calendar"></ons-icon>
+                    </div>
+                    <div class="center">
+                        {{facility.visited}}更新
+                    </div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div class="left">
+                        <ons-icon icon="fa-book"></ons-icon>
+                    </div>
+                    <div class="center">
+                        {{facility.expressway}}
+
+                    </div>
+                </ons-list-item>
+            </ons-list>
+
+            <div style="margin-top: 20px; padding: 20px;">
+                <ons-button modifier='large' onclick="document.getElementById('nav').resetToPage('home.html')">
+                    トップページへ戻る
+                </ons-button>
+            </div>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="map.html">
+        <ons-page ng-controller="MapController">
+            <ons-toolbar>
+                <div class="left" style="line-height: 44px">
+                    <ons-back-button>Back</ons-back-button>
+                </div>
+                <div class="center">スタンプ施設マップ</div>
+                <div class="right" style="line-height: 44px">
+                </div>
+            </ons-toolbar>
+            <div id="map" style="height: 100%; position: relative;" tabindex="0">
+            </div>
+        </ons-page>
+    </ons-template>
+</body>
+
+</html>

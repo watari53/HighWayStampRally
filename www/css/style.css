@@ -1,0 +1,158 @@
+/* home */
+#top-image {
+    height: auto;
+    width: 100%;
+}
+
+/* facilities */
+.list-item-container {
+  line-height: 1;
+  padding: 15px 0px 15px 15px;
+}
+
+.list-thumbnail {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-repeat: no-repeat;
+  background-color: white;
+  width: 80%;
+  position: relative;
+  -webkit-background-size: 100% auto;
+       -o-background-size: 100% auto;
+          background-size: 100% auto;
+}
+.list-thumbnail:before {
+  padding-top: 75%;
+  content: "";
+  display: block;
+}
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.name {
+  font-weight: 500;
+  line-height: 16px;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.location {
+  font-size: 14px;
+  opacity: 0.4;
+  margin-bottom: 6px;
+}
+
+.desc {
+  line-height: 1.2;
+  font-size: 13px;
+}
+/* end facilities */
+
+/* check in */
+.check-in-image {
+  /*background: url('bg.png') 0 0 no-repeat;*/
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: contain;
+  width: 45%;
+  position: relative;
+  -webkit-background-size: 100% auto;
+       -o-background-size: 100% auto;
+          background-size: 100% auto;
+}
+.check-in-image:before {
+  content:"";
+  display: block;
+  padding-top:80%;
+}
+
+/* facility detail */
+.detail-image {
+  /*background: url('bg.png') 0 0 no-repeat;*/
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: contain;
+  width: 97%;
+  position: relative;
+  -webkit-background-size: 100% auto;
+       -o-background-size: 100% auto;
+          background-size: 100% auto;
+}
+.detail-image:before {
+  content:"";
+  display: block;
+  padding-top:80%;
+  
+}
+/*
+.card {
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  width: 200px;
+  height: 200px;
+}
+*/
+.card {
+  /*background: url('bg.png') 0 0 no-repeat;*/
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: contain;
+  width: 80%;
+  position: relative;
+  -webkit-background-size: 100% auto;
+       -o-background-size: 100% auto;
+          background-size: 100% auto;
+}
+.card:before {
+  content:"";
+  display: block;
+  padding-top:100%;
+}
+
+.card-toolbar ons-back-button span {
+  color: white;
+}
+
+.action-col {
+  text-align: center;
+  opacity: 0.4;
+  padding: 10px 0 8px;
+}
+
+.action-col:active {
+  opacity: 0.7;
+}
+
+.action-col ons-button {
+  padding: 0;
+  line-height: 1;
+}
+
+.action-icon {
+  padding: 0 0 4px 0;
+}
+
+.action-icon ons-icon {
+  font-size: 28px;
+}
+
+.action-label {
+  font-size: 12px;
+}
+
+.prop-desc {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.prop-desc ons-icon {
+  font-size: 14px;
+  vertical-align: -0px;
+  opacity: 0.5;
+}
