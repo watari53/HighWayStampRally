@@ -7,71 +7,71 @@ ons.bootstrap()
 
     .factory('DataService', function($http) {
         var service = {};
-        //                 service.data = {
-        //                     "Facilities": [{
-        //                         "id": 0,
-        //                         "name": "海老名SA",
-        //                         "expressway": "東名高速道路",
-        //                         "lat": 35.431248,
-        //                         "lng": 139.401082,
-        //                         "address": '神奈川県川崎市中原区宮内1-3-3',
-        //                         "image_url": "./images/no-image.jpg",
-        //                         "memo": "メロンパンが名物",
-        //                         "visited": null,
-        //                         "load_id": 0
-        //                     }, {
-        //                         "id": 1,
-        //                         "name": "足柄SA",
-        //                         "expressway": "東名高速道路",
-        //                         "lat": 35.313659,
-        //                         "lng": 138.966701,
-        //                         "address": '神奈川県川崎市中原区宮内1-3-3',
-        //                         "image_url": "./images/dummy-image.jpg",
-        //                         "memo": "カレーパンが名物",
-        //                         "visited": "2017-6-20",
-        //                         "load_id": 1
-        //                     }, {
-        //                         "id": 2,
-        //                         "name": "談合坂SA",
-        //                         "expressway": "中央自動車道",
-        //                         "lat": 35.628314,
-        //                         "lng": 139.046914,
-        //                         "address": '神奈川県川崎市中原区宮内1-3-3',
-        //                         "image_url": "./images/no-image.jpg",
-        //                         "memo": "こっぺパンが名物",
-        //                         "visited": null,
-        //                         "load_id": 0
-        //                     }, {
-        //                         "id": 3,
-        //                         "name": "石川PA",
-        //                         "expressway": "中央自動車道",
-        //                         "lat": 35.677597,
-        //                         "lng": 139.37142,
-        //                         "address": '神奈川県川崎市中原区宮内1-3-3',
-        //                         "image_url": "./images/dummy-image.jpg",
-        //                         "memo": "レーズンパンが名物",
-        //                         "visited": "2017-6-23",
-        //                         "load_id": 1
-        //                     }],
-        // 
-        //                     "Loads": [{
-        //                         "id": 0,
-        //                         "name": "東名高速道路",
-        //                         "all_facility": 100,
-        //                         "visited_num": 20,
-        //                         "image_url": "./dummy-image.jpg"
-        //                     }, {
-        //                         "id": 1,
-        //                         "name": "中央自動車道",
-        //                         "all_facility": 100,
-        //                         "visited_num": 20,
-        //                         "image_url": "./dummy-image.jpg"
-        //                     }]
-        //                 };
-        $http.get("data.json").then(function(response) {
-            service.data = response.data;
-            console.log(response.data);
-        });
+                        service.data = {
+                            "Facilities": [{
+                                "id": 0,
+                                "name": "海老名SA",
+                                "expressway": "東名高速道路",
+                                "lat": 35.431248,
+                                "lng": 139.401082,
+                                "address": '神奈川県川崎市中原区宮内1-3-3',
+                                "image_url": "./images/no-image.jpg",
+                                "memo": "メロンパンが名物",
+                                "visited_date": null,
+                                "load_id": 0
+                            }, {
+                                "id": 1,
+                                "name": "足柄SA",
+                                "expressway": "東名高速道路",
+                                "lat": 35.313659,
+                                "lng": 138.966701,
+                                "address": '神奈川県川崎市中原区宮内1-3-3',
+                                "image_url": "./images/dummy-image.jpg",
+                                "memo": "カレーパンが名物",
+                                "visited_date": "2017-6-20",
+                                "load_id": 1
+                            }, {
+                                "id": 2,
+                                "name": "談合坂SA",
+                                "expressway": "中央自動車道",
+                                "lat": 35.628314,
+                                "lng": 139.046914,
+                                "address": '神奈川県川崎市中原区宮内1-3-3',
+                                "image_url": "./images/no-image.jpg",
+                                "memo": "こっぺパンが名物",
+                                "visited_date": null,
+                                "load_id": 0
+                            }, {
+                                "id": 3,
+                                "name": "石川PA",
+                                "expressway": "中央自動車道",
+                                "lat": 35.677597,
+                                "lng": 139.37142,
+                                "address": '神奈川県川崎市中原区宮内1-3-3',
+                                "image_url": "./images/dummy-image.jpg",
+                                "memo": "レーズンパンが名物",
+                                "visited_date": "2017-6-23",
+                                "load_id": 1
+                            }],
+        
+                            "Loads": [{
+                                "id": 0,
+                                "name": "東名高速道路",
+                                "all_facility": 100,
+                                "visited_num": 20,
+                                "image_url": "./dummy-image.jpg"
+                            }, {
+                                "id": 1,
+                                "name": "中央自動車道",
+                                "all_facility": 100,
+                                "visited_num": 20,
+                                "image_url": "./dummy-image.jpg"
+                            }]
+                        };
+        // $http.get("data.json").then(function(response) {
+        //     service.data = response.data;
+        //     console.log(response.data);
+        // });
 
         service.getFacilityData = function() {
             return this.data.Facilities;
@@ -298,7 +298,7 @@ ons.bootstrap()
         // update facility data
         $scope.checkin_submit = function() {
             var date = new Date();
-            $scope.facility.visited = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            $scope.facility.visited_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             $scope.facility.image_url = $scope.image_url;
             DataService.updateFacilityData($scope.facility);
             nav.pushPage('facility_detail.html', {
