@@ -18,7 +18,7 @@ ons.bootstrap()
                                 "image_url": "./images/no-image.jpg",
                                 "memo": "メロンパンが名物",
                                 "visited_date": null,
-                                "load_id": 0
+                                "road_id": 0
                             }, {
                                 "id": 1,
                                 "name": "足柄SA",
@@ -29,7 +29,7 @@ ons.bootstrap()
                                 "image_url": "./images/dummy-image.jpg",
                                 "memo": "カレーパンが名物",
                                 "visited_date": "2017-6-20",
-                                "load_id": 1
+                                "road_id": 0
                             }, {
                                 "id": 2,
                                 "name": "談合坂SA",
@@ -40,7 +40,7 @@ ons.bootstrap()
                                 "image_url": "./images/no-image.jpg",
                                 "memo": "こっぺパンが名物",
                                 "visited_date": null,
-                                "load_id": 0
+                                "road_id": 1
                             }, {
                                 "id": 3,
                                 "name": "石川PA",
@@ -51,21 +51,21 @@ ons.bootstrap()
                                 "image_url": "./images/dummy-image.jpg",
                                 "memo": "レーズンパンが名物",
                                 "visited_date": "2017-6-23",
-                                "load_id": 1
+                                "road_id": 1
                             }],
         
-                            "Loads": [{
+                            "Roads": [{
                                 "id": 0,
                                 "name": "東名高速道路",
                                 "all_facility": 100,
-                                "visited_num": 20,
-                                "image_url": "./dummy-image.jpg"
+                                "visited_facility_num": 1,
+                                "image_url": "./images/dummy-image.jpg"
                             }, {
                                 "id": 1,
                                 "name": "中央自動車道",
                                 "all_facility": 100,
-                                "visited_num": 20,
-                                "image_url": "./dummy-image.jpg"
+                                "visited_facility_num": 1,
+                                "image_url": "./images/dummy-image.jpg"
                             }]
                         };
         // $http.get("data.json").then(function(response) {
@@ -96,16 +96,16 @@ ons.bootstrap()
             return facility;
         };
 
-        service.getLoadData = function() {
-            return this.data.Loads;
+        service.getRoadData = function() {
+            return this.data.Roads;
         };
 
-        service.getFacilitiesByLoadId = function(id) {
-            console.log('get facilities by load_id');
+        service.getFacilitiesByRoadId = function(id) {
+            console.log('get facilities by road_id');
             var facilities = [];
-            var load_id = id;
+            var road_id = id;
             for (key in this.data.Facilities) {
-                if (this.data.Facilities[key].load_id == load_id) {
+                if (this.data.Facilities[key].road_id == road_id) {
                     facilities.push(this.data.Facilities[key]);
                 }
             }
@@ -115,8 +115,8 @@ ons.bootstrap()
         return service;
     })
     .controller('AppController', function($scope) {
-        this.load = function(page) {
-            $scope.splitter.content.load(page);
+        this.road = function(page) {
+            $scope.splitter.content.road(page);
             $scope.splitter.left.close();
         };
 
@@ -172,16 +172,16 @@ ons.bootstrap()
     .controller('CollectionController', function($scope, DataService) {
         // alert(DataService.getData().Facilities[0].name);
         $scope.facilities = DataService.getFacilityData(); //SA.PAデータ
-        // alert(DataService.getLoadData()[0].name);
-        $scope.loads = DataService.getLoadData(); //高速道路データ
+        // alert(DataService.getRoadData()[0].name);
+        $scope.roads = DataService.getRoadData(); //高速道路データ
     })
     .controller('FacilitiesController', function($scope, DataService) {
         console.log("facilities controller");
         $scope.facilities = [];
 
-        $scope.load = $scope.nav.topPage.data.load;
-        $scope.facilities = DataService.getFacilitiesByLoadId($scope.load.id);
-        // $scope.load_id = options.load_id;
+        $scope.road = $scope.nav.topPage.data.road;
+        $scope.facilities = DataService.getFacilitiesByRoadId($scope.road.id);
+        // $scope.road_id = options.road_id;
     })
     // require facility object
     // ex pushPage
@@ -298,6 +298,11 @@ ons.bootstrap()
         // update facility data
         $scope.checkin_submit = function() {
             var date = new Date();
+            // visit at first
+            // update road
+            if (!$scope.facility.visited_date) {
+                console.log("update visited num of road");
+            }
             $scope.facility.visited_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             $scope.facility.image_url = $scope.image_url;
             DataService.updateFacilityData($scope.facility);

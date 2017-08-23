@@ -33,7 +33,8 @@
                     <ons-page>
                         <ons-list>
                             <ons-list-header>Menu</ons-list-header>
-                            <ons-list-item ng-click="app.load('home.html')" tappable>
+                            <ons-list-item ng-click="app.load('home.html')" tappable>
+
                               <div class="left">
                                 <ons-icon icon="md-home" class="list-item__icon"></ons-icon>
                               </div>
@@ -186,8 +187,8 @@
                 <ons-list>
                     <ons-list-header> 道路別制覇状況 </ons-list-header>
 
-                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('facilities.html', {data : {load: load}})" ng-repeat="load in loads">
-                        {{load.name}}
+                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('facilities.html', {data : {road: road}})" ng-repeat="road in roads">
+                        {{road.name}}
                     </ons-list-item>
                 </ons-list>
 
@@ -203,7 +204,7 @@
                 <div class="left" style="line-height: 44px">
                     <ons-back-button>Back</ons-back-button>
                 </div>
-                <div class="center">{{load.name}}のSA・PA一覧</div>
+                <div class="center">{{road.name}}のSA・PA一覧</div>
                 <div class="right" style="line-height: 44px">
                 </div>
             </ons-toolbar>
