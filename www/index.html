@@ -188,7 +188,16 @@
                     <ons-list-header> 道路別制覇状況 </ons-list-header>
 
                     <ons-list-item modifier="chevron" ng-click="nav.pushPage('facilities.html', {data : {road: road}})" ng-repeat="road in roads">
-                        {{road.name}}
+                        <div class="left">
+                            <!-- <div class="list-item__thumbnail" style="background-image: url({{road.image_url}});"> </div> -->
+                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                        </div>
+                        <div class="center">
+                            {{road.name}}
+                        </div>
+                        <div class="right" style="padding-right: 40px;">
+                            {{road.visited_facility_num}} / {{road.all_facility_num}}
+                        </div>
                     </ons-list-item>
                 </ons-list>
 
@@ -226,7 +235,7 @@
                                 <i class="fa fa-map-marker"></i> {{facility.expressway}}
                             </div>
                             <div class="desc">
-                                <i class="fa fa-calendar"></i> {{facility.visited}}
+                                <i class="fa fa-calendar"></i> {{facility.visited_date}}
                             </div>
                         </ons-col>
                         <ons-col width="40px"></ons-col>
@@ -273,7 +282,7 @@
                         <ons-icon icon="fa-calendar"></ons-icon>
                     </div>
                     <div class="center">
-                        {{facility.visited}}更新
+                        {{facility.visited_date}}更新
                     </div>
                 </ons-list-item>
                 <ons-list-item>

@@ -7,106 +7,125 @@ ons.bootstrap()
 
     .factory('DataService', function($http) {
         var service = {};
-                        service.data = {
-                            "Facilities": [{
-                                "id": 0,
-                                "name": "海老名SA",
-                                "expressway": "東名高速道路",
-                                "lat": 35.431248,
-                                "lng": 139.401082,
-                                "address": '神奈川県川崎市中原区宮内1-3-3',
-                                "image_url": "./images/no-image.jpg",
-                                "memo": "メロンパンが名物",
-                                "visited_date": null,
-                                "road_id": 0
-                            }, {
-                                "id": 1,
-                                "name": "足柄SA",
-                                "expressway": "東名高速道路",
-                                "lat": 35.313659,
-                                "lng": 138.966701,
-                                "address": '神奈川県川崎市中原区宮内1-3-3',
-                                "image_url": "./images/dummy-image.jpg",
-                                "memo": "カレーパンが名物",
-                                "visited_date": "2017-6-20",
-                                "road_id": 0
-                            }, {
-                                "id": 2,
-                                "name": "談合坂SA",
-                                "expressway": "中央自動車道",
-                                "lat": 35.628314,
-                                "lng": 139.046914,
-                                "address": '神奈川県川崎市中原区宮内1-3-3',
-                                "image_url": "./images/no-image.jpg",
-                                "memo": "こっぺパンが名物",
-                                "visited_date": null,
-                                "road_id": 1
-                            }, {
-                                "id": 3,
-                                "name": "石川PA",
-                                "expressway": "中央自動車道",
-                                "lat": 35.677597,
-                                "lng": 139.37142,
-                                "address": '神奈川県川崎市中原区宮内1-3-3',
-                                "image_url": "./images/dummy-image.jpg",
-                                "memo": "レーズンパンが名物",
-                                "visited_date": "2017-6-23",
-                                "road_id": 1
-                            }],
-        
-                            "Roads": [{
-                                "id": 0,
-                                "name": "東名高速道路",
-                                "all_facility": 100,
-                                "visited_facility_num": 1,
-                                "image_url": "./images/dummy-image.jpg"
-                            }, {
-                                "id": 1,
-                                "name": "中央自動車道",
-                                "all_facility": 100,
-                                "visited_facility_num": 1,
-                                "image_url": "./images/dummy-image.jpg"
-                            }]
-                        };
+        service.data = {
+            "Facilities": [{
+                "id": 0,
+                "name": "海老名SA",
+                "expressway": "東名高速道路",
+                "lat": 35.431248,
+                "lng": 139.401082,
+                "address": '神奈川県川崎市中原区宮内1-3-3',
+                "image_url": "./images/no-image.jpg",
+                "memo": "メロンパンが名物",
+                "visited_date": null,
+                "road_id": 0
+            }, {
+                "id": 1,
+                "name": "足柄SA",
+                "expressway": "東名高速道路",
+                "lat": 35.313659,
+                "lng": 138.966701,
+                "address": '神奈川県川崎市中原区宮内1-3-3',
+                "image_url": "./images/dummy-image.jpg",
+                "memo": "カレーパンが名物",
+                "visited_date": "2017-6-20",
+                "road_id": 0
+            }, {
+                "id": 2,
+                "name": "談合坂SA",
+                "expressway": "中央自動車道",
+                "lat": 35.628314,
+                "lng": 139.046914,
+                "address": '神奈川県川崎市中原区宮内1-3-3',
+                "image_url": "./images/no-image.jpg",
+                "memo": "こっぺパンが名物",
+                "visited_date": null,
+                "road_id": 1
+            }, {
+                "id": 3,
+                "name": "石川PA",
+                "expressway": "中央自動車道",
+                "lat": 35.677597,
+                "lng": 139.37142,
+                "address": '神奈川県川崎市中原区宮内1-3-3',
+                "image_url": "./images/dummy-image.jpg",
+                "memo": "レーズンパンが名物",
+                "visited_date": "2017-6-23",
+                "road_id": 1
+            }],
+
+            "Roads": [{
+                "id": 0,
+                "name": "東名高速道路",
+                "all_facility_num": 2,
+                "visited_facility_num": 1,
+                "image_url": "./images/dummy-image.jpg"
+            }, {
+                "id": 1,
+                "name": "中央自動車道",
+                "all_facility_num": 2,
+                "visited_facility_num": 1,
+                "image_url": "./images/dummy-image.jpg"
+            }]
+        };
         // $http.get("data.json").then(function(response) {
         //     service.data = response.data;
         //     console.log(response.data);
         // });
 
         service.getFacilityData = function() {
-            return this.data.Facilities;
+            return service.data.Facilities;
         };
 
         service.updateFacilityData = function(facility) {
             console.log("updateFacilityData");
-            console.log(facility);
-            this.data.Facilities[facility.id] = facility;
-            return this.data.Facilities[facility.id];
+
+            service.data.Facilities[facility.id] = facility;
+            return service.data.Facilities[facility.id];
         };
+
+        service.updateRoadData = function(road) {
+            console.log("updateRoadData");
+            console.log("update: " + road.name);
+            service.data.Roads[road.id] = road;
+            return service.data.Facilities[road.id];
+        }
 
         service.getFacilityById = function(facility_id) {
             var facility = null;
             var facility_id = facility_id;
-            for (key in this.data.Facilities) {
-                if (this.data.Facilities[key].id == facility_id) {
-                    facility = this.data.Facilities[key];
+            for (key in service.data.Facilities) {
+                if (service.data.Facilities[key].id == facility_id) {
+                    facility = service.data.Facilities[key];
                     break;
                 }
             }
             return facility;
         };
 
+        service.getRoadById = function(road_id) {
+            var road = null;
+            var road_id = road_id;
+            for (key in service.data.Roads) {
+                if (service.data.Roads[key].id == road_id) {
+                    road = service.data.Roads[key];
+                    break;
+                }
+            }
+            return road;
+        }
+
         service.getRoadData = function() {
-            return this.data.Roads;
+            return service.data.Roads;
         };
 
         service.getFacilitiesByRoadId = function(id) {
             console.log('get facilities by road_id');
             var facilities = [];
             var road_id = id;
-            for (key in this.data.Facilities) {
-                if (this.data.Facilities[key].road_id == road_id) {
-                    facilities.push(this.data.Facilities[key]);
+            for (key in service.data.Facilities) {
+                if (service.data.Facilities[key].road_id == road_id) {
+                    facilities.push(service.data.Facilities[key]);
                 }
             }
             return facilities;
@@ -200,7 +219,7 @@ ons.bootstrap()
     })
     .controller('CheckInController', function($scope, DataService) {
         console.log("check in controller");
-        $scope.facility = null;
+        var facility = null;
 
         var lat = $scope.nav.topPage.data.lat; // your position
         var lng = $scope.nav.topPage.data.lng; // your potision
@@ -227,8 +246,8 @@ ons.bootstrap()
             // get id which clicked facility
             var f_id = this.options.id;
             console.log("click marker: facility id=" + f_id);
-            $scope.facility = DataService.getFacilityById(f_id)
-            console.log($scope.facility);
+            facility = DataService.getFacilityById(f_id)
+            console.log("check: " + facility.name);
             var checkin_btn_elm = document.getElementById("check-in-btn");
             checkin_btn_elm.removeAttribute("disabled");
         }
@@ -298,17 +317,17 @@ ons.bootstrap()
         // update facility data
         $scope.checkin_submit = function() {
             var date = new Date();
-            // visit at first
-            // update road
-            if (!$scope.facility.visited_date) {
-                console.log("update visited num of road");
+            if (facility.visited_date == null) {
+                var road = DataService.getRoadById(facility.road_id);
+                road.visited_facility_num++;
+                DataService.updateRoadData(road);
             }
-            $scope.facility.visited_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-            $scope.facility.image_url = $scope.image_url;
-            DataService.updateFacilityData($scope.facility);
+            facility.visited_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            facility.image_url = $scope.image_url;
+            DataService.updateFacilityData(facility);
             nav.pushPage('facility_detail.html', {
                 data: {
-                    facility: $scope.facility,
+                    facility: facility,
                     when_visit_flg: true
                 }
             });
