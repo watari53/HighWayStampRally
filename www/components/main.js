@@ -178,14 +178,20 @@ ons.bootstrap()
 
         // Error callback
         function onMapError(error) {
-            getLocationModal.hide();
+            console.log("error to get location");
             alert("位置情報を取得できませんでした");
-
             getLocationModal.hide();
-            alert("位置情報を取得できませんでした");
+            var INIT_PLACE = [35.681167, 139.767052]
 
             console.log('code: ' + error.code + '\n' +
                 'message: ' + error.message + '\n');
+
+            nav.pushPage('check_in.html', {
+                data: {
+                    lat: INIT_PLACE[0],
+                    lng: INIT_PLACE[1]
+                }
+            })
         }
     })
     .controller('CollectionController', function($scope, DataService) {
