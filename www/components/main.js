@@ -222,6 +222,11 @@ ons.bootstrap()
                 dialog.show();
             });
         }
+
+        $scope.goFacilities = function(road_id) {
+            var road = DataService.getRoadById(road_id);
+            nav.pushPage('facilities.html', {data : {road: road}})
+        }
     })
     .controller('CheckInController', function($scope, DataService) {
         console.log("check in controller");

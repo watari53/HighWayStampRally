@@ -69,7 +69,7 @@
                 </div>
             </ons-toolbar>
             <div class="content" style="text-align: center">
-                <img id="top-image" src="images/top-image.jpg"></img>
+                <img id="top-image" src="./images/top-image.jpg"></img>
                 <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
                     高速道路のSA・PAで
                     <br>旅の思い出をあつめませんか？
@@ -285,7 +285,7 @@
                         {{facility.visited_date}}更新
                     </div>
                 </ons-list-item>
-                <ons-list-item>
+                <ons-list-item modifier="chevron" ng-click="goFacilities(facility.road_id)">
                     <div class="left">
                         <ons-icon icon="fa-book"></ons-icon>
                     </div>
