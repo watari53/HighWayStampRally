@@ -68,35 +68,57 @@ ons.bootstrap()
                 "image_url": "./images/dummy-image.jpg"
             }]
         };
+        // set data
         // $http.get("data.json").then(function(response) {
         //     service.data = response.data;
         //     console.log(response.data);
         // });
+        localStorage.setItem("Facilities", JSON.stringify(service.data.Facilities));
+        localStorage.setItem("Roads", JSON.stringify(service.data.Roads));
+        // var facilities = localStorage.getItem("Facilities");
+        // alert(JSON.parse(facilities)[0].name);
+        // var roads = localStorage.getItem("Roads");
+        // alert(JSON.parse(roads)[0].name);
 
         service.getFacilityData = function() {
-            return service.data.Facilities;
+            console.log("getFacilityData");
+
+            return JSON.parse(localStorage.getItem("Facilities"));
         };
+        service.setFacilityData = function(facilities) {
+            console.log("setFacilityData");
+            localStorage.setItem("Facilities", JSON.stringify(facilities));
+        }
 
         service.updateFacilityData = function(facility) {
             console.log("updateFacilityData");
 
-            service.data.Facilities[facility.id] = facility;
-            return service.data.Facilities[facility.id];
+            // service.data.Facilities[facility.id] = facility;
+            var facilities = service.getFacilityData();
+            facilities[facility.id] = facility;
+            service.setFacilityData(facilities);
+            return facilities[facility.id];
         };
+
+        service.setRoadData = function(roads) {
+            localStorage.setItem("Roads", JSON.stringify(roads));
+        }
 
         service.updateRoadData = function(road) {
             console.log("updateRoadData");
             console.log("update: " + road.name);
-            service.data.Roads[road.id] = road;
-            return service.data.Facilities[road.id];
+            var roads = service.getRoadData();
+            roads[road.id] = road;
+            service.setRoadData(roads);
         }
 
         service.getFacilityById = function(facility_id) {
             var facility = null;
             var facility_id = facility_id;
-            for (key in service.data.Facilities) {
-                if (service.data.Facilities[key].id == facility_id) {
-                    facility = service.data.Facilities[key];
+            var facilities = service.getFacilityData();
+            for (key in facilities) {
+                if (facilities[key].id == facility_id) {
+                    facility = facilities[key];
                     break;
                 }
             }
@@ -106,9 +128,10 @@ ons.bootstrap()
         service.getRoadById = function(road_id) {
             var road = null;
             var road_id = road_id;
-            for (key in service.data.Roads) {
-                if (service.data.Roads[key].id == road_id) {
-                    road = service.data.Roads[key];
+            var roads = service.getRoadData();
+            for (key in roads) {
+                if (roads[key].id == road_id) {
+                    road = roads[key];
                     break;
                 }
             }
@@ -116,21 +139,21 @@ ons.bootstrap()
         }
 
         service.getRoadData = function() {
-            return service.data.Roads;
+            return JSON.parse(localStorage.getItem("Roads"));
         };
 
         service.getFacilitiesByRoadId = function(id) {
             console.log('get facilities by road_id');
-            var facilities = [];
+            var ret_facilities = [];  //road_idを持つfacilityを代入
             var road_id = id;
-            for (key in service.data.Facilities) {
-                if (service.data.Facilities[key].road_id == road_id) {
-                    facilities.push(service.data.Facilities[key]);
+            var facilities = service.getFacilityData();
+            for (key in facilities) {
+                if (facilities[key].road_id == road_id) {
+                    ret_facilities.push(facilities[key]);
                 }
             }
-            return facilities;
+            return ret_facilities;
         };
-
         return service;
     })
     .controller('AppController', function($scope) {
