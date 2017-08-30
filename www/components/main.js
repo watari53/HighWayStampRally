@@ -8,7 +8,7 @@ ons.bootstrap()
     .factory('DataService', function($http) {
         var service = {};
         service.data = {
-            "Facilities": [{
+            "Stamps": [{
                 "id": 0,
                 "name": "海老名SA",
                 "expressway": "東名高速道路",
@@ -17,7 +17,7 @@ ons.bootstrap()
                 "address": '神奈川県川崎市中原区宮内1-3-3',
                 "image_url": "./images/no-image.jpg",
                 "memo": "メロンパンが名物",
-                "visited_date": null,
+                "get_date": null,
                 "road_id": 0
             }, {
                 "id": 1,
@@ -28,7 +28,7 @@ ons.bootstrap()
                 "address": '神奈川県川崎市中原区宮内1-3-3',
                 "image_url": "./images/dummy-image.jpg",
                 "memo": "カレーパンが名物",
-                "visited_date": "2017-6-20",
+                "get_date": "2017-6-20",
                 "road_id": 0
             }, {
                 "id": 2,
@@ -39,7 +39,7 @@ ons.bootstrap()
                 "address": '神奈川県川崎市中原区宮内1-3-3',
                 "image_url": "./images/no-image.jpg",
                 "memo": "こっぺパンが名物",
-                "visited_date": null,
+                "get_date": null,
                 "road_id": 1
             }, {
                 "id": 3,
@@ -50,21 +50,21 @@ ons.bootstrap()
                 "address": '神奈川県川崎市中原区宮内1-3-3',
                 "image_url": "./images/dummy-image.jpg",
                 "memo": "レーズンパンが名物",
-                "visited_date": "2017-6-23",
+                "get_date": "2017-6-23",
                 "road_id": 1
             }],
 
             "Roads": [{
                 "id": 0,
                 "name": "東名高速道路",
-                "all_facility_num": 2,
-                "visited_facility_num": 1,
+                "all_stamps_num": 2,
+                "get_stamp_num": 1,
                 "image_url": "./images/dummy-image.jpg"
             }, {
                 "id": 1,
                 "name": "中央自動車道",
-                "all_facility_num": 2,
-                "visited_facility_num": 1,
+                "all_stamps_num": 2,
+                "get_stamp_num": 1,
                 "image_url": "./images/dummy-image.jpg"
             }]
         };
@@ -73,31 +73,31 @@ ons.bootstrap()
         //     service.data = response.data;
         //     console.log(response.data);
         // });
-        localStorage.setItem("Facilities", JSON.stringify(service.data.Facilities));
+        localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));
         localStorage.setItem("Roads", JSON.stringify(service.data.Roads));
-        // var facilities = localStorage.getItem("Facilities");
-        // alert(JSON.parse(facilities)[0].name);
+        // var stamps = localStorage.getItem("stamps");
+        // alert(JSON.parse(stamps)[0].name);
         // var roads = localStorage.getItem("Roads");
         // alert(JSON.parse(roads)[0].name);
 
-        service.getFacilityData = function() {
-            console.log("getFacilityData");
+        service.getStampData = function() {
+            console.log("getStampData");
 
-            return JSON.parse(localStorage.getItem("Facilities"));
+            return JSON.parse(localStorage.getItem("Stamps"));
         };
-        service.setFacilityData = function(facilities) {
-            console.log("setFacilityData");
-            localStorage.setItem("Facilities", JSON.stringify(facilities));
+        service.setStampData = function(stamps) {
+            console.log("setStampData");
+            localStorage.setItem("Stamps", JSON.stringify(stamps));
         }
 
-        service.updateFacilityData = function(facility) {
-            console.log("updateFacilityData");
+        service.updateStampData = function(stamp) {
+            console.log("updateStampData");
 
-            // service.data.Facilities[facility.id] = facility;
-            var facilities = service.getFacilityData();
-            facilities[facility.id] = facility;
-            service.setFacilityData(facilities);
-            return facilities[facility.id];
+            // service.data.Stamps[stamp.id] = stamp;
+            var stamps = service.getStampData();
+            stamps[stamp.id] = stamp;
+            service.setStampData(stamps);
+            return stamps[stamp.id];
         };
 
         service.setRoadData = function(roads) {
@@ -112,17 +112,17 @@ ons.bootstrap()
             service.setRoadData(roads);
         }
 
-        service.getFacilityById = function(facility_id) {
-            var facility = null;
-            var facility_id = facility_id;
-            var facilities = service.getFacilityData();
-            for (key in facilities) {
-                if (facilities[key].id == facility_id) {
-                    facility = facilities[key];
+        service.getStampById = function(stamp_id) {
+            var stamp = null;
+            var stamp_id = stamp_id;
+            var stamps = service.getStampData();
+            for (key in stamps) {
+                if (stamps[key].id == stamp_id) {
+                    stamp = stamps[key];
                     break;
                 }
             }
-            return facility;
+            return stamp;
         };
 
         service.getRoadById = function(road_id) {
@@ -142,17 +142,17 @@ ons.bootstrap()
             return JSON.parse(localStorage.getItem("Roads"));
         };
 
-        service.getFacilitiesByRoadId = function(id) {
-            console.log('get facilities by road_id');
-            var ret_facilities = [];  //road_idを持つfacilityを代入
+        service.getStampsByRoadId = function(id) {
+            console.log('get stamps by road_id');
+            var ret_stamps = [];  //road_idを持つstampを代入
             var road_id = id;
-            var facilities = service.getFacilityData();
-            for (key in facilities) {
-                if (facilities[key].road_id == road_id) {
-                    ret_facilities.push(facilities[key]);
+            var stamps = service.getStampData();
+            for (key in stamps) {
+                if (stamps[key].road_id == road_id) {
+                    ret_stamps.push(stamps[key]);
                 }
             }
-            return ret_facilities;
+            return ret_stamps;
         };
         return service;
     })
@@ -218,17 +218,17 @@ ons.bootstrap()
         }
     })
     .controller('CollectionController', function($scope, DataService) {
-        // alert(DataService.getData().Facilities[0].name);
-        $scope.facilities = DataService.getFacilityData(); //SA.PAデータ
+        // alert(DataService.getData().Stamps[0].name);
+        $scope.stamps = DataService.getStampData(); //SA.PAデータ
         // alert(DataService.getRoadData()[0].name);
         $scope.roads = DataService.getRoadData(); //高速道路データ
     })
-    .controller('FacilitiesController', function($scope, DataService) {
-        console.log("facilities controller");
-        $scope.facilities = [];
+    .controller('StampsController', function($scope, DataService) {
+        console.log("stamps controller");
+        $scope.stamps = [];
 
         $scope.road = $scope.nav.topPage.data.road;
-        $scope.facilities = DataService.getFacilitiesByRoadId($scope.road.id);
+        $scope.stamps = DataService.getStampsByRoadId($scope.road.id);
         // $scope.road_id = options.road_id;
     })
     // require facility object
@@ -246,9 +246,9 @@ ons.bootstrap()
             });
         }
 
-        $scope.goFacilities = function(road_id) {
+        $scope.goStamps = function(road_id) {
             var road = DataService.getRoadById(road_id);
-            nav.pushPage('facilities.html', {data : {road: road}})
+            nav.pushPage('stamps.html', {data : {road: road}})
         }
     })
     .controller('CheckInController', function($scope, DataService) {
@@ -266,9 +266,9 @@ ons.bootstrap()
         }).addTo(map);
 
         console.log("set markers");
-        var facilities = DataService.getFacilityData();
-        for (var i = 0; i < facilities.length; i++) {
-            f = facilities[i];
+        var stamps = DataService.getStampData();
+        for (var i = 0; i < stamps.length; i++) {
+            f = stamps[i];
             L.marker([f.lat, f.lng], {
                     id: f.id,
                 }).addTo(map)
@@ -280,7 +280,7 @@ ons.bootstrap()
             // get id which clicked facility
             var f_id = this.options.id;
             console.log("click marker: facility id=" + f_id);
-            facility = DataService.getFacilityById(f_id)
+            facility = DataService.getStampById(f_id)
             console.log("check: " + facility.name);
             var checkin_btn_elm = document.getElementById("check-in-btn");
             checkin_btn_elm.removeAttribute("disabled");
@@ -351,14 +351,14 @@ ons.bootstrap()
         // update facility data
         $scope.checkin_submit = function() {
             var date = new Date();
-            if (facility.visited_date == null) {
+            if (facility.get_date == null) {
                 var road = DataService.getRoadById(facility.road_id);
-                road.visited_facility_num++;
+                road.get_stamp_num++;
                 DataService.updateRoadData(road);
             }
-            facility.visited_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            facility.get_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             facility.image_url = $scope.image_url;
-            DataService.updateFacilityData(facility);
+            DataService.updateStampData(facility);
             nav.pushPage('facility_detail.html', {
                 data: {
                     facility: facility,
@@ -414,9 +414,9 @@ ons.bootstrap()
             }).addTo(map);
 
             console.log("set markers");
-            var facilities = DataService.getFacilityData();
-            for (var i = 0; i < facilities.length; i++) {
-                f = facilities[i];
+            var stamps = DataService.getStampData();
+            for (var i = 0; i < stamps.length; i++) {
+                f = stamps[i];
                 L.marker([f.lat, f.lng]).addTo(map)
                     .bindPopup(f.name);
             }

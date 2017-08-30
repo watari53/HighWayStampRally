@@ -187,7 +187,7 @@
                 <ons-list>
                     <ons-list-header> 道路別制覇状況 </ons-list-header>
 
-                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('facilities.html', {data : {road: road}})" ng-repeat="road in roads">
+                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('stamps.html', {data : {road: road}})" ng-repeat="road in roads">
                         <div class="left">
                             <!-- <div class="list-item__thumbnail" style="background-image: url({{road.image_url}});"> </div> -->
                             <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
@@ -196,7 +196,7 @@
                             {{road.name}}
                         </div>
                         <div class="right" style="padding-right: 40px;">
-                            {{road.visited_facility_num}} / {{road.all_facility_num}}
+                            {{road.get_stamp_num}} / {{road.all_stamps_num}}
                         </div>
                     </ons-list-item>
                 </ons-list>
@@ -205,9 +205,9 @@
         </ons-page>
     </ons-template>
 
-    <!-- facilities by road number -->
-    <ons-template id="facilities.html">
-        <ons-page ng-controller="FacilitiesController">
+    <!-- stamps by stamprally id -->
+    <ons-template id="stamps.html">
+        <ons-page ng-controller="StampsController">
 
             <ons-toolbar>
                 <div class="left" style="line-height: 44px">
@@ -220,8 +220,8 @@
 
             <ons-list>
 
-                <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='facility in facilities'>
-                    <ons-row ng-click="nav.pushPage('facility_detail.html', {data: {facility: facility}})">
+                <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='facility in stamps'>
+                    <ons-row ng-click="nav.pushPage('stamp_detail.html', {data: {facility: facility}})">
                         <ons-col width="30%">
                             <!--<img src="{{facility.image_url}}" class="thumbnail">-->
                             <div class="list-thumbnail" style="background-image: url({{facility.image_url}});"> </div>
@@ -235,7 +235,7 @@
                                 <i class="fa fa-map-marker"></i> {{facility.expressway}}
                             </div>
                             <div class="desc">
-                                <i class="fa fa-calendar"></i> {{facility.visited_date}}
+                                <i class="fa fa-calendar"></i> {{facility.get_date}}
                             </div>
                         </ons-col>
                         <ons-col width="40px"></ons-col>
@@ -247,7 +247,7 @@
         </ons-page>
     </ons-template>
 
-    <ons-template id='facility_detail.html'>
+    <ons-template id='stamp_detail.html'>
         <ons-page modifier="shop-details" ng-controller='FacilityDetailController'>
 
             <ons-toolbar>
@@ -282,10 +282,10 @@
                         <ons-icon icon="fa-calendar"></ons-icon>
                     </div>
                     <div class="center">
-                        {{facility.visited_date}}更新
+                        {{facility.get_date}}更新
                     </div>
                 </ons-list-item>
-                <ons-list-item modifier="chevron" ng-click="goFacilities(facility.road_id)">
+                <ons-list-item modifier="chevron" ng-click="goStamps(facility.road_id)">
                     <div class="left">
                         <ons-icon icon="fa-book"></ons-icon>
                     </div>
