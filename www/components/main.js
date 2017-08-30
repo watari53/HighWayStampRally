@@ -233,7 +233,7 @@ ons.bootstrap()
     })
     // require facility object
     // ex pushPage
-    // nav.pushPage('facility_detail.html', {data: {facility: facility}})
+    // nav.pushPage('stamp_detail.html', {data: {facility: facility}})
     // data
     // facility: facility object
     // when_visit_flg: true or blank
@@ -359,7 +359,7 @@ ons.bootstrap()
             facility.get_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             facility.image_url = $scope.image_url;
             DataService.updateStampData(facility);
-            nav.pushPage('facility_detail.html', {
+            nav.pushPage('stamp_detail.html', {
                 data: {
                     facility: facility,
                     when_visit_flg: true
