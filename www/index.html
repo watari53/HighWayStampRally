@@ -169,7 +169,7 @@
 
     <ons-template id="collection.html">
 
-        <ons-page ng-controller="CollectionController">
+        <ons-page ng-controller="StampBooksController">
             <ons-toolbar>
                 <div class="left" style="line-height: 44px">
                     <ons-back-button>Back</ons-back-button>
@@ -187,16 +187,16 @@
                 <ons-list>
                     <ons-list-header> 道路別制覇状況 </ons-list-header>
 
-                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('stamps.html', {data : {road: road}})" ng-repeat="road in roads">
+                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}})" ng-repeat="stamp_book in stamp_books">
                         <div class="left">
-                            <!-- <div class="list-item__thumbnail" style="background-image: url({{road.image_url}});"> </div> -->
+                            <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
                             <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
                         </div>
                         <div class="center">
-                            {{road.name}}
+                            {{stamp_book.name}}
                         </div>
                         <div class="right" style="padding-right: 40px;">
-                            {{road.get_stamp_num}} / {{road.all_stamps_num}}
+                            {{stamp_book.get_stamp_num}} / {{stamp_book.all_stamps_num}}
                         </div>
                     </ons-list-item>
                 </ons-list>
@@ -248,7 +248,7 @@
     </ons-template>
 
     <ons-template id='stamp_detail.html'>
-        <ons-page modifier="shop-details" ng-controller='FacilityDetailController'>
+        <ons-page modifier="shop-details" ng-controller='StampDetailController'>
 
             <ons-toolbar>
                 <div class="left" style="line-height: 44px">
@@ -285,7 +285,7 @@
                         {{facility.get_date}}更新
                     </div>
                 </ons-list-item>
-                <ons-list-item modifier="chevron" ng-click="goStamps(facility.road_id)">
+                <ons-list-item>
                     <div class="left">
                         <ons-icon icon="fa-book"></ons-icon>
                     </div>

@@ -9,63 +9,63 @@ ons.bootstrap()
         var service = {};
         service.data = {
             "Stamps": [{
-                "id": 0,
-                "name": "海老名SA",
-                "expressway": "東名高速道路",
-                "lat": 35.431248,
-                "lng": 139.401082,
-                "address": '神奈川県川崎市中原区宮内1-3-3',
-                "image_url": "./images/no-image.jpg",
-                "memo": "メロンパンが名物",
-                "get_date": null,
-                "road_id": 0
+                "id"           : 0,
+                "name"         : "海老名SA",
+                "expressway"   : "東名高速道路",
+                "lat"          : 35.431248,
+                "lng"          : 139.401082,
+                "address"      : '神奈川県川崎市中原区宮内1-3-3',
+                "image_url"    : "./images/no-image.jpg",
+                "memo"         : "メロンパンが名物",
+                "get_date"     : null,
+                "stamp_book_id": 0
             }, {
-                "id": 1,
-                "name": "足柄SA",
-                "expressway": "東名高速道路",
-                "lat": 35.313659,
-                "lng": 138.966701,
-                "address": '神奈川県川崎市中原区宮内1-3-3',
-                "image_url": "./images/dummy-image.jpg",
-                "memo": "カレーパンが名物",
-                "get_date": "2017-6-20",
-                "road_id": 0
+                "id"           : 1,
+                "name"         : "足柄SA",
+                "expressway"   : "東名高速道路",
+                "lat"          : 35.313659,
+                "lng"          : 138.966701,
+                "address"      : '神奈川県川崎市中原区宮内1-3-3',
+                "image_url"    : "./images/dummy-image.jpg",
+                "memo"         : "カレーパンが名物",
+                "get_date"     : "2017-6-20",
+                "stamp_book_id": 0
             }, {
-                "id": 2,
-                "name": "談合坂SA",
-                "expressway": "中央自動車道",
-                "lat": 35.628314,
-                "lng": 139.046914,
-                "address": '神奈川県川崎市中原区宮内1-3-3',
-                "image_url": "./images/no-image.jpg",
-                "memo": "こっぺパンが名物",
-                "get_date": null,
-                "road_id": 1
+                "id"           : 2,
+                "name"         : "談合坂SA",
+                "expressway"   : "中央自動車道",
+                "lat"          : 35.628314,
+                "lng"          : 139.046914,
+                "address"      : '神奈川県川崎市中原区宮内1-3-3',
+                "image_url"    : "./images/no-image.jpg",
+                "memo"         : "こっぺパンが名物",
+                "get_date"     : null,
+                "stamp_book_id": 1
             }, {
-                "id": 3,
-                "name": "石川PA",
-                "expressway": "中央自動車道",
-                "lat": 35.677597,
-                "lng": 139.37142,
-                "address": '神奈川県川崎市中原区宮内1-3-3',
-                "image_url": "./images/dummy-image.jpg",
-                "memo": "レーズンパンが名物",
-                "get_date": "2017-6-23",
-                "road_id": 1
+                "id"           : 3,
+                "name"         : "石川PA",
+                "expressway"   : "中央自動車道",
+                "lat"          : 35.677597,
+                "lng"          : 139.37142,
+                "address"      : '神奈川県川崎市中原区宮内1-3-3',
+                "image_url"    : "./images/dummy-image.jpg",
+                "memo"         : "レーズンパンが名物",
+                "get_date"     : "2017-6-23",
+                "stamp_book_id": 1
             }],
 
-            "Roads": [{
-                "id": 0,
-                "name": "東名高速道路",
+            "StampBooks": [{
+                "id"            : 0,
+                "name"          : "東名高速道路",
                 "all_stamps_num": 2,
-                "get_stamp_num": 1,
-                "image_url": "./images/dummy-image.jpg"
+                "get_stamp_num" : 1,
+                "image_url"     : "./images/dummy-image.jpg"
             }, {
-                "id": 1,
-                "name": "中央自動車道",
+                "id"            : 1,
+                "name"          : "中央自動車道",
                 "all_stamps_num": 2,
-                "get_stamp_num": 1,
-                "image_url": "./images/dummy-image.jpg"
+                "get_stamp_num" : 1,
+                "image_url"     : "./images/dummy-image.jpg"
             }]
         };
         // set data
@@ -74,11 +74,11 @@ ons.bootstrap()
         //     console.log(response.data);
         // });
         localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));
-        localStorage.setItem("Roads", JSON.stringify(service.data.Roads));
+        localStorage.setItem("StampBooks", JSON.stringify(service.data.StampBooks));
         // var stamps = localStorage.getItem("stamps");
         // alert(JSON.parse(stamps)[0].name);
-        // var roads = localStorage.getItem("Roads");
-        // alert(JSON.parse(roads)[0].name);
+        // var stamp_books = localStorage.getItem("StampBooks");
+        // alert(JSON.parse(stamp_books)[0].name);
 
         service.getStampData = function() {
             console.log("getStampData");
@@ -100,16 +100,16 @@ ons.bootstrap()
             return stamps[stamp.id];
         };
 
-        service.setRoadData = function(roads) {
-            localStorage.setItem("Roads", JSON.stringify(roads));
+        service.setStampBooksData = function(stamp_books) {
+            localStorage.setItem("StampBooks", JSON.stringify(stamp_books));
         }
 
-        service.updateRoadData = function(road) {
-            console.log("updateRoadData");
-            console.log("update: " + road.name);
-            var roads = service.getRoadData();
-            roads[road.id] = road;
-            service.setRoadData(roads);
+        service.updateStampBookData = function(stamp_book) {
+            console.log("updateStampBookData");
+            console.log("update: " + stamp_book.name);
+            var stamp_books = service.getStampBooks();
+            stamp_books[stamp_book.id] = stamp_book;
+            service.setStampBooksData(stamp_books);
         }
 
         service.getStampById = function(stamp_id) {
@@ -125,30 +125,30 @@ ons.bootstrap()
             return stamp;
         };
 
-        service.getRoadById = function(road_id) {
-            var road = null;
-            var road_id = road_id;
-            var roads = service.getRoadData();
-            for (key in roads) {
-                if (roads[key].id == road_id) {
-                    road = roads[key];
+        service.getStampBookById = function(stamp_book_id) {
+            var stamp_book = null;
+            var stamp_book_id = stamp_book_id;
+            var stamp_books = service.getStampBooks();
+            for (key in stamp_books) {
+                if (stamp_books[key].id == stamp_book_id) {
+                    stamp_book = stamp_books[key];
                     break;
                 }
             }
-            return road;
+            return stamp_book;
         }
 
-        service.getRoadData = function() {
-            return JSON.parse(localStorage.getItem("Roads"));
+        service.getStampBooks = function() {
+            return JSON.parse(localStorage.getItem("StampBooks"));
         };
 
-        service.getStampsByRoadId = function(id) {
-            console.log('get stamps by road_id');
-            var ret_stamps = [];  //road_idを持つstampを代入
-            var road_id = id;
+        service.getStampsByStampBookId = function(id) {
+            console.log('get stamps by stamp_book_id');
+            var ret_stamps = [];  //stamp_book_idを持つstamp群を代入
+            var stamp_book_id = id;
             var stamps = service.getStampData();
             for (key in stamps) {
-                if (stamps[key].road_id == road_id) {
+                if (stamps[key].stamp_book_id == stamp_book_id) {
                     ret_stamps.push(stamps[key]);
                 }
             }
@@ -217,19 +217,17 @@ ons.bootstrap()
             })
         }
     })
-    .controller('CollectionController', function($scope, DataService) {
-        // alert(DataService.getData().Stamps[0].name);
+    .controller('StampBooksController', function($scope, DataService) {
         $scope.stamps = DataService.getStampData(); //SA.PAデータ
-        // alert(DataService.getRoadData()[0].name);
-        $scope.roads = DataService.getRoadData(); //高速道路データ
+        $scope.stamp_books = DataService.getStampBooks(); //高速道路データ
     })
     .controller('StampsController', function($scope, DataService) {
         console.log("stamps controller");
         $scope.stamps = [];
 
-        $scope.road = $scope.nav.topPage.data.road;
-        $scope.stamps = DataService.getStampsByRoadId($scope.road.id);
-        // $scope.road_id = options.road_id;
+        $scope.road = $scope.nav.topPage.data.stamp_book;
+        $scope.stamps = DataService.getStampsByStampBookId($scope.road.id);
+        // $scope.stamp_book_id = options.stamp_book_id;
     })
     // require facility object
     // ex pushPage
@@ -237,18 +235,13 @@ ons.bootstrap()
     // data
     // facility: facility object
     // when_visit_flg: true or blank
-    .controller('FacilityDetailController', function($scope, DataService) {
+    .controller('StampDetailController', function($scope, DataService) {
         $scope.facility = $scope.nav.topPage.data.facility;
         // Stamp取得のdialogを取得
         if ($scope.nav.topPage.data.when_visit_flg) {
             ons.createDialog('press_stamp.html').then(function(dialog) {
                 dialog.show();
             });
-        }
-
-        $scope.goStamps = function(road_id) {
-            var road = DataService.getRoadById(road_id);
-            nav.pushPage('stamps.html', {data : {road: road}})
         }
     })
     .controller('CheckInController', function($scope, DataService) {
@@ -352,9 +345,9 @@ ons.bootstrap()
         $scope.checkin_submit = function() {
             var date = new Date();
             if (facility.get_date == null) {
-                var road = DataService.getRoadById(facility.road_id);
+                var road = DataService.getStampBookById(facility.stamp_book_id);
                 road.get_stamp_num++;
-                DataService.updateRoadData(road);
+                DataService.updateStampBookData(road);
             }
             facility.get_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             facility.image_url = $scope.image_url;
