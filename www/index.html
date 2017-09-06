@@ -297,7 +297,7 @@
             </ons-list>
 
             <div style="margin-top: 20px; padding: 20px;">
-                <ons-button modifier='large' onclick="document.getElementById('nav').resetToPage('home.html')">
+                <ons-button modifier='large' ng-click="go_home()">
                     トップページへ戻る
                 </ons-button>
             </div>
@@ -312,6 +312,7 @@
                 </div>
                 <div class="center">スタンプ施設マップ</div>
                 <div class="right" style="line-height: 44px">
+                    <ons-toolbar-button><ons-icon icon="ion-home"></ons-icon></ons-toolbar-button>
                 </div>
             </ons-toolbar>
             <div id="map" style="height: 100%; position: relative;" tabindex="0">

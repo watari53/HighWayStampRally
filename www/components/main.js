@@ -156,6 +156,16 @@ ons.bootstrap()
         };
         return service;
     })
+    .factory('CommonService', function() {
+        var service = {};
+
+        service.goHome = function() {
+            var home="home.html"
+            document.getElementById('nav').resetToPage(home);
+        };
+
+        return service;
+    })
     .controller('AppController', function($scope) {
         this.road = function(page) {
             $scope.splitter.content.road(page);
@@ -234,7 +244,7 @@ ons.bootstrap()
     // data
     // stamp: <stamp object>
     // when_visit_flg: <true or blank>
-    .controller('StampDetailController', function($scope, DataService) {
+    .controller('StampDetailController', function($scope, DataService, CommonService) {
         $scope.stamp = $scope.nav.topPage.data.stamp;
         // Stamp取得のdialogを取得
         if ($scope.nav.topPage.data.when_visit_flg) {
@@ -242,6 +252,11 @@ ons.bootstrap()
                 dialog.show();
             });
         }
+
+        $scope.go_home = function() {
+            alert("go home");
+            CommonService.goHome();
+        };
     })
     .controller('CheckInController', function($scope, DataService) {
         console.log("check in controller");
