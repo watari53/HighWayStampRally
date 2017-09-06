@@ -223,20 +223,19 @@ ons.bootstrap()
     })
     .controller('StampsController', function($scope, DataService) {
         console.log("stamps controller");
-        $scope.stamps = [];
 
-        $scope.road = $scope.nav.topPage.data.stamp_book;
-        $scope.stamps = DataService.getStampsByStampBookId($scope.road.id);
+        $scope.stamp_book = $scope.nav.topPage.data.stamp_book;
+        $scope.stamps = DataService.getStampsByStampBookId($scope.stamp_book.id);
         // $scope.stamp_book_id = options.stamp_book_id;
     })
-    // require facility object
+    // require stamp object
     // ex pushPage
-    // nav.pushPage('stamp_detail.html', {data: {facility: facility}})
+    // nav.pushPage('stamp_detail.html', {data: {stamp: stamp}})
     // data
-    // facility: facility object
-    // when_visit_flg: true or blank
+    // stamp: <stamp object>
+    // when_visit_flg: <true or blank>
     .controller('StampDetailController', function($scope, DataService) {
-        $scope.facility = $scope.nav.topPage.data.facility;
+        $scope.stamp = $scope.nav.topPage.data.stamp;
         // Stamp取得のdialogを取得
         if ($scope.nav.topPage.data.when_visit_flg) {
             ons.createDialog('press_stamp.html').then(function(dialog) {
@@ -246,7 +245,7 @@ ons.bootstrap()
     })
     .controller('CheckInController', function($scope, DataService) {
         console.log("check in controller");
-        var facility = null;
+        var stamp = null;
 
         var lat = $scope.nav.topPage.data.lat; // your position
         var lng = $scope.nav.topPage.data.lng; // your potision
@@ -270,11 +269,11 @@ ons.bootstrap()
         }
 
         function activate_checkin(e) {
-            // get id which clicked facility
-            var f_id = this.options.id;
-            console.log("click marker: facility id=" + f_id);
-            facility = DataService.getStampById(f_id)
-            console.log("check: " + facility.name);
+            // get id which clicked stamp point
+            var s_id = this.options.id;
+            console.log("click marker: stamp id=" + s_id);
+            stamp = DataService.getStampById(s_id)
+            console.log("check: " + stamp.name);
             var checkin_btn_elm = document.getElementById("check-in-btn");
             checkin_btn_elm.removeAttribute("disabled");
         }
@@ -341,20 +340,20 @@ ons.bootstrap()
             getPictureFromGallery(onSuccess);
         }
 
-        // update facility data
+        // update stamp data
         $scope.checkin_submit = function() {
             var date = new Date();
-            if (facility.get_date == null) {
-                var road = DataService.getStampBookById(facility.stamp_book_id);
-                road.get_stamp_num++;
-                DataService.updateStampBookData(road);
+            if (stamp.get_date == null) {
+                var stamp_book = DataService.getStampBookById(stamp.stamp_book_id);
+                stamp_book.get_stamp_num++;
+                DataService.updateStampBookData(stamp_book);
             }
-            facility.get_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-            facility.image_url = $scope.image_url;
-            DataService.updateStampData(facility);
+            stamp.get_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            stamp.image_url = $scope.image_url;
+            DataService.updateStampData(stamp);
             nav.pushPage('stamp_detail.html', {
                 data: {
-                    facility: facility,
+                    stamp: stamp,
                     when_visit_flg: true
                 }
             });

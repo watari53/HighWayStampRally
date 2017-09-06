@@ -213,29 +213,29 @@
                 <div class="left" style="line-height: 44px">
                     <ons-back-button>Back</ons-back-button>
                 </div>
-                <div class="center">{{road.name}}のSA・PA一覧</div>
+                <div class="center">{{stamp_book.name}}のSA・PA一覧</div>
                 <div class="right" style="line-height: 44px">
                 </div>
             </ons-toolbar>
 
             <ons-list>
 
-                <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='facility in stamps'>
-                    <ons-row ng-click="nav.pushPage('stamp_detail.html', {data: {facility: facility}})">
+                <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='stamp in stamps'>
+                    <ons-row ng-click="nav.pushPage('stamp_detail.html', {data: {stamp: stamp}})">
                         <ons-col width="30%">
-                            <!--<img src="{{facility.image_url}}" class="thumbnail">-->
-                            <div class="list-thumbnail" style="background-image: url({{facility.image_url}});"> </div>
+                            <!--<img src="{{stamp.image_url}}" class="thumbnail">-->
+                            <div class="list-thumbnail" style="background-image: url({{stamp.image_url}});"> </div>
 
                         </ons-col>
                         <ons-col>
                             <div class="name">
-                                {{facility.name}}
+                                {{stamp.name}}
                             </div>
                             <div class="location">
-                                <i class="fa fa-map-marker"></i> {{facility.expressway}}
+                                <i class="fa fa-map-marker"></i> {{stamp.expressway}}
                             </div>
                             <div class="desc">
-                                <i class="fa fa-calendar"></i> {{facility.get_date}}
+                                <i class="fa fa-calendar"></i> {{stamp.get_date}}
                             </div>
                         </ons-col>
                         <ons-col width="40px"></ons-col>
@@ -254,7 +254,7 @@
                 <div class="left" style="line-height: 44px">
                     <ons-back-button>Back</ons-back-button>
                 </div>
-                <div class="center">{{facility.name}}</div>
+                <div class="center">{{stamp.name}}</div>
 
                 <div class="right" style="line-height: 44px">
                 </div>
@@ -262,7 +262,7 @@
 
             <ons-list modifier="inset" style="margin-top: 10px">
                 <ons-list-item style="text-align: center">
-                    <div class="detail-image" style="background-image: url({{facility.image_url}});"> </div>
+                    <div class="detail-image" style="background-image: url({{stamp.image_url}});"> </div>
                 </ons-list-item>
             </ons-list>
 
@@ -273,7 +273,7 @@
                         <ons-icon icon="fa-map-marker"></ons-icon>
                     </div>
                     <div class="center">
-                        {{facility.address}}
+                        {{stamp.address}}
 
                     </div>
                 </ons-list-item>
@@ -282,7 +282,7 @@
                         <ons-icon icon="fa-calendar"></ons-icon>
                     </div>
                     <div class="center">
-                        {{facility.get_date}}更新
+                        {{stamp.get_date}}更新
                     </div>
                 </ons-list-item>
                 <ons-list-item>
@@ -290,7 +290,7 @@
                         <ons-icon icon="fa-book"></ons-icon>
                     </div>
                     <div class="center">
-                        {{facility.expressway}}
+                        {{stamp.expressway}}
 
                     </div>
                 </ons-list-item>
