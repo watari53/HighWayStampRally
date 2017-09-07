@@ -9,49 +9,49 @@ ons.bootstrap()
         var service = {};
         service.data = {
             "Stamps": [{
-                "id"           : 0,
-                "name"         : "海老名SA",
-                "expressway"   : "東名高速道路",
-                "lat"          : 35.431248,
-                "lng"          : 139.401082,
-                "address"      : '神奈川県川崎市中原区宮内1-3-3',
-                "image_url"    : "./images/no-image.jpg",
-                "memo"         : "メロンパンが名物",
-                "get_date"     : null,
-                "stamp_book_id": 0
+                "id"             : 0,
+                "name"           : "海老名SA",
+                "lat"            : 35.431248,
+                "lng"            : 139.401082,
+                "address"        : '神奈川県川崎市中原区宮内1-3-3',
+                "image_url"      : "./images/no-image.jpg",
+                "memo"           : "メロンパンが名物",
+                "get_date"       : null,
+                "stamp_book_id"  : 0
+                "stamp_book_name": "東名高速道路",
             }, {
-                "id"           : 1,
-                "name"         : "足柄SA",
-                "expressway"   : "東名高速道路",
-                "lat"          : 35.313659,
-                "lng"          : 138.966701,
-                "address"      : '神奈川県川崎市中原区宮内1-3-3',
-                "image_url"    : "./images/dummy-image.jpg",
-                "memo"         : "カレーパンが名物",
-                "get_date"     : "2017-6-20",
-                "stamp_book_id": 0
+                "id"             : 1,
+                "name"           : "足柄SA",
+                "lat"            : 35.313659,
+                "lng"            : 138.966701,
+                "address"        : '神奈川県川崎市中原区宮内1-3-3',
+                "image_url"      : "./images/dummy-image.jpg",
+                "memo"           : "カレーパンが名物",
+                "get_date"       : "2017-6-20",
+                "stamp_book_id"  : 0
+                "stamp_book_name": "東名高速道路",
             }, {
-                "id"           : 2,
-                "name"         : "談合坂SA",
-                "expressway"   : "中央自動車道",
-                "lat"          : 35.628314,
-                "lng"          : 139.046914,
-                "address"      : '神奈川県川崎市中原区宮内1-3-3',
-                "image_url"    : "./images/no-image.jpg",
-                "memo"         : "こっぺパンが名物",
-                "get_date"     : null,
-                "stamp_book_id": 1
+                "id"             : 2,
+                "name"           : "談合坂SA",
+                "lat"            : 35.628314,
+                "lng"            : 139.046914,
+                "address"        : '神奈川県川崎市中原区宮内1-3-3',
+                "image_url"      : "./images/no-image.jpg",
+                "memo"           : "こっぺパンが名物",
+                "get_date"       : null,
+                "stamp_book_id"  : 1
+                "stamp_book_name": "中央自動車道",
             }, {
-                "id"           : 3,
-                "name"         : "石川PA",
-                "expressway"   : "中央自動車道",
-                "lat"          : 35.677597,
-                "lng"          : 139.37142,
-                "address"      : '神奈川県川崎市中原区宮内1-3-3',
-                "image_url"    : "./images/dummy-image.jpg",
-                "memo"         : "レーズンパンが名物",
-                "get_date"     : "2017-6-23",
-                "stamp_book_id": 1
+                "id"             : 3,
+                "name"           : "石川PA",
+                "lat"            : 35.677597,
+                "lng"            : 139.37142,
+                "address"        : '神奈川県川崎市中原区宮内1-3-3',
+                "image_url"      : "./images/dummy-image.jpg",
+                "memo"           : "レーズンパンが名物",
+                "get_date"       : "2017-6-23",
+                "stamp_book_id"  : 1
+                "stamp_book_name": "中央自動車道",
             }],
 
             "StampBooks": [{
@@ -59,13 +59,15 @@ ons.bootstrap()
                 "name"          : "東名高速道路",
                 "all_stamps_num": 2,
                 "get_stamp_num" : 1,
-                "image_url"     : "./images/dummy-image.jpg"
+                "image_url"     : "./images/dummy-image.jpg",
+                "download_flg": false,
             }, {
                 "id"            : 1,
                 "name"          : "中央自動車道",
                 "all_stamps_num": 2,
                 "get_stamp_num" : 1,
                 "image_url"     : "./images/dummy-image.jpg"
+                "download_flg": true,
             }]
         };
         // set data
