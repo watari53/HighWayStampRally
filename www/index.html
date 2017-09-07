@@ -185,9 +185,8 @@
                 </ons-list>
 
                 <ons-list>
-                    <ons-list-header> 道路別制覇状況 </ons-list-header>
-
-                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}})" ng-repeat="stamp_book in stamp_books">
+                    <ons-list-header> 参加済み </ons-list-header>
+                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}})" ng-repeat="stamp_book in stamp_books | filter : {active_flg: true}">
                         <div class="left">
                             <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
                             <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
@@ -199,6 +198,21 @@
                             {{stamp_book.get_stamp_num}} / {{stamp_book.all_stamps_num}}
                         </div>
                     </ons-list-item>
+
+                    <ons-list-header> 未参加 </ons-list-header>
+                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}})" ng-repeat="stamp_book in stamp_books | filter : {active_flg: false}">
+                        <div class="left">
+                            <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
+                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                        </div>
+                        <div class="center">
+                            {{stamp_book.name}}
+                        </div>
+                        <div class="right" style="padding-right: 40px;">
+                            {{stamp_book.get_stamp_num}} / {{stamp_book.all_stamps_num}}
+                        </div>
+                    </ons-list-item>
+
                 </ons-list>
 
             </div>

@@ -17,7 +17,7 @@ ons.bootstrap()
                 "image_url"      : "./images/no-image.jpg",
                 "memo"           : "メロンパンが名物",
                 "get_date"       : null,
-                "stamp_book_id"  : 0
+                "stamp_book_id"  : 0,
                 "stamp_book_name": "東名高速道路",
             }, {
                 "id"             : 1,
@@ -28,7 +28,7 @@ ons.bootstrap()
                 "image_url"      : "./images/dummy-image.jpg",
                 "memo"           : "カレーパンが名物",
                 "get_date"       : "2017-6-20",
-                "stamp_book_id"  : 0
+                "stamp_book_id"  : 0,
                 "stamp_book_name": "東名高速道路",
             }, {
                 "id"             : 2,
@@ -39,7 +39,7 @@ ons.bootstrap()
                 "image_url"      : "./images/no-image.jpg",
                 "memo"           : "こっぺパンが名物",
                 "get_date"       : null,
-                "stamp_book_id"  : 1
+                "stamp_book_id"  : 1,
                 "stamp_book_name": "中央自動車道",
             }, {
                 "id"             : 3,
@@ -50,7 +50,7 @@ ons.bootstrap()
                 "image_url"      : "./images/dummy-image.jpg",
                 "memo"           : "レーズンパンが名物",
                 "get_date"       : "2017-6-23",
-                "stamp_book_id"  : 1
+                "stamp_book_id"  : 1,
                 "stamp_book_name": "中央自動車道",
             }],
 
@@ -60,14 +60,14 @@ ons.bootstrap()
                 "all_stamps_num": 2,
                 "get_stamp_num" : 1,
                 "image_url"     : "./images/dummy-image.jpg",
-                "download_flg": false,
+                "active_flg": true,
             }, {
                 "id"            : 1,
                 "name"          : "中央自動車道",
                 "all_stamps_num": 2,
                 "get_stamp_num" : 1,
-                "image_url"     : "./images/dummy-image.jpg"
-                "download_flg": true,
+                "image_url"     : "./images/dummy-image.jpg",
+                "active_flg": false,
             }]
         };
         // set data
