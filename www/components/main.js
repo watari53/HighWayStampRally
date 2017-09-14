@@ -47,11 +47,44 @@ ons.bootstrap()
                 "lat"            : 35.677597,
                 "lng"            : 139.37142,
                 "address"        : '神奈川県川崎市中原区宮内1-3-3',
-                "image_url"      : "./images/dummy-image.jpg",
+                "image_url"      : "./images/no-image.jpg",
                 "memo"           : "レーズンパンが名物",
-                "get_date"       : "2017-6-23",
+                "get_date"       : null,
                 "stamp_book_id"  : 1,
                 "stamp_book_name": "中央自動車道",
+            }, {
+                "id"             : 4,
+                "name"           : "東京ラスク",
+                "lat"            : 35.688507,
+                "lng"            : 139.88102,
+                "address"        : '東京都千代田区1-3-3',
+                "image_url"      : "./images/no-image.jpg",
+                "memo"           : "レーズンパンが名物",
+                "get_date"       : "2017-09-10",
+                "stamp_book_id"  : 2,
+                "stamp_book_name": "これだけは行きたい！東京の旅",
+            }, {
+                "id"             : 5,
+                "name"           : "東京ばなな",
+                "lat"            : 35.678597,
+                "lng"            : 139.38142,
+                "address"        : '東京千代田区1-3-3',
+                "image_url"      : "./images/no-image.jpg",
+                "memo"           : "レーズンパンが名物",
+                "get_date"       : null,
+                "stamp_book_id"  : 2,
+                "stamp_book_name": "これだけは行きたい！東京の旅",
+            }, {
+                "id"             : 6,
+                "name"           : "東京いちご",
+                "lat"            : 35.608597,
+                "lng"            : 139.39142,
+                "address"        : '東京千代田区1-3-4',
+                "image_url"      : "./images/no-image.jpg",
+                "memo"           : "イチゴが名物",
+                "get_date"       : null,
+                "stamp_book_id"  : 2,
+                "stamp_book_name": "これだけは行きたい！東京の旅",
             }],
 
             "StampBooks": [{
@@ -65,9 +98,16 @@ ons.bootstrap()
                 "id"            : 1,
                 "name"          : "中央自動車道",
                 "all_stamps_num": 2,
-                "get_stamp_num" : 1,
+                "get_stamp_num" : 0,
                 "image_url"     : "./images/dummy-image.jpg",
                 "active_flg": false,
+            }, {
+                "id"            : 2,
+                "name"          : "これだけは行きたい！東京の旅",
+                "all_stamps_num": 3,
+                "get_stamp_num" : 1,
+                "image_url"     : "./images/dummy-image.jpg",
+                "active_flg": true,
             }]
         };
         // set data
@@ -102,9 +142,23 @@ ons.bootstrap()
             return stamps[stamp.id];
         };
 
+        service.getActiveStampData = function() {
+            console.log("getActiveStampData");
+            var stamp_books = JSON.parse(localStorage.getItem("StampBooks"));
+            var ret_stamps = [];
+            for (var i = 0; i < stamp_books.length; i++) {
+                if (stamp_books[i].active_flg == true) {
+                    var stamps = []
+                    var stamps = service.getStampsByStampBookId(stamp_books[i].id);
+                    jQuery.merge(ret_stamps, stamps);
+                }
+            }
+            return ret_stamps;
+        }
+
         service.setStampBooksData = function(stamp_books) {
             localStorage.setItem("StampBooks", JSON.stringify(stamp_books));
-        }
+        };
 
         service.updateStampBookData = function(stamp_book) {
             console.log("updateStampBookData");
@@ -112,7 +166,7 @@ ons.bootstrap()
             var stamp_books = service.getStampBooks();
             stamp_books[stamp_book.id] = stamp_book;
             service.setStampBooksData(stamp_books);
-        }
+        };
 
         service.getStampById = function(stamp_id) {
             var stamp = null;
@@ -138,7 +192,7 @@ ons.bootstrap()
                 }
             }
             return stamp_book;
-        }
+        };
 
         service.getStampBooks = function() {
             return JSON.parse(localStorage.getItem("StampBooks"));
@@ -230,8 +284,27 @@ ons.bootstrap()
         }
     })
     .controller('StampBooksController', function($scope, DataService) {
+        var ACTIVATED_STAMPS = 0;
         $scope.stamps = DataService.getStampData(); //SA.PAデータ
         $scope.stamp_books = DataService.getStampBooks(); //高速道路データ
+        $scope.activate_stamp_book = function(stamp_book, e) {
+            var progress_circle = ' <svg class="progress-circular progress-circular--indeterminate"> <circle class="progress-circular__background"/> <circle class="progress-circular__primary progress-circular--indeterminate__primary"/> <circle class="progress-circular__secondary progress-circular--indeterminate__secondary"/> </svg>';
+            console.log("activate stamp book: id=" + stamp_book.id);
+            e.target.innerHTML = progress_circle;
+        };
+
+        $( 'input[name="segment"]:radio' ).change( function() {  
+            if ($(this).val() == ACTIVATED_STAMPS) {
+                alert("show active stamps");
+            } else {
+                alert("show inactive stamps");
+            }
+        });  
+
+        $scope.go_stamps = function(stamp_book) {
+            var stamp_book = stamp_book;
+            nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}});
+        };
     })
     .controller('StampsController', function($scope, DataService) {
         console.log("stamps controller");
@@ -239,6 +312,7 @@ ons.bootstrap()
         $scope.stamp_book = $scope.nav.topPage.data.stamp_book;
         $scope.stamps = DataService.getStampsByStampBookId($scope.stamp_book.id);
         // $scope.stamp_book_id = options.stamp_book_id;
+
     })
     // require stamp object
     // ex pushPage
@@ -274,15 +348,27 @@ ons.bootstrap()
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
+        map.on('moveend', function(){
+            // alert("map moveend");
+        });
+
         console.log("set markers");
         var stamps = DataService.getStampData();
-        for (var i = 0; i < stamps.length; i++) {
-            f = stamps[i];
-            L.marker([f.lat, f.lng], {
-                    id: f.id,
-                }).addTo(map)
-                .on('click', activate_checkin)
-                .bindPopup(f.name);
+        var stamps = DataService.getActiveStampData();
+
+        set_markers(stamps);
+
+        function set_markers(stamps) {
+            for (var i = 0; i < stamps.length; i++) {
+                f = stamps[i];
+                popup = '<ons-icon icon="fa-map-marker"></ons-icon>' + f.name + "<br>" + '<ons-icon icon="fa-book"></ons-icon>' + f.stamp_book_name;
+                            
+                L.marker([f.lat, f.lng], {
+                        id: f.id,
+                    }).addTo(map)
+                    .on('click', activate_checkin)
+                    .bindPopup(popup);
+            }
         }
 
         function activate_checkin(e) {
@@ -308,6 +394,7 @@ ons.bootstrap()
                 onSuccess(imageURI);
             }, onFail, options);
         };
+
         var getPictureFromCamera = function(onSuccess) {
             var options = {
                 sourceType: Camera.PictureSourceType.CAMERA,
