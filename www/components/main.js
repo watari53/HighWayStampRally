@@ -295,9 +295,13 @@ ons.bootstrap()
 
         $( 'input[name="segment"]:radio' ).change( function() {  
             if ($(this).val() == ACTIVATED_STAMPS) {
-                alert("show active stamps");
+                console.log("show active stamps");
+                $('#inactivated').css('display', 'none');
+                $('#activated').css('display', 'block');
             } else {
-                alert("show inactive stamps");
+                console.log("show inactive stamps");
+                $('#activated').css('display', 'none');
+                $('#inactivated').css('display', 'block');
             }
         });  
 

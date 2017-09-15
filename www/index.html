@@ -174,26 +174,27 @@
                 <div class="left" style="line-height: 44px">
                     <ons-back-button>Back</ons-back-button>
                 </div>
-                <div class="center">スタンプコレクション</div>
+                <div class="center">スタンプラリー</div>
                 <div class="right" style="line-height: 44px">
                 </div>
             </ons-toolbar>
 
             <div class="content" style="text-align: center">
 
-<div class="segment segment--material" style="width: 70%; margin: 10px auto;">
-  <div class="segment__item segment--material__item">
-    <input type="radio" class="segment__input segment--material__input" name="segment" value="0" checked>
-    <button class="segment__button segment--material__button">取得済み</button>
-  </div>
-  <div class="segment__item segment--material__item">
-    <input type="radio" class="segment__input segment--material__input" value="1" name="segment">
-    <button class="segment__button segment--material__button" ng-click="togglePage()">未取得</button>
-  </div>
-</div>
+                <div class="segment segment--material" style="width: 70%; margin: 10px auto;">
+                  <div class="segment__item segment--material__item">
+                    <input type="radio" class="segment__input segment--material__input" name="segment" value="0" checked>
+                    <button class="segment__button segment--material__button">参加済み</button>
+                  </div>
+                  <div class="segment__item segment--material__item">
+                    <input type="radio" class="segment__input segment--material__input" value="1" name="segment">
+                    <button class="segment__button segment--material__button" ng-click="togglePage()">未参加</button>
+                  </div>
+                </div>
+
                 <ons-list>
                     <div id="activated">
-                        <ons-list-header> 参加済み </ons-list-header>
+                        <ons-list-header> 参加済みのスタンプラリー一覧 </ons-list-header>
                         <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)" ng-repeat="stamp_book in stamp_books | filter : {active_flg: true}">
                             <div class="left">
                                 <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
@@ -209,21 +210,23 @@
                         </ons-list-item>
                     </div>
 
-                    <ons-list-header> 未参加 </ons-list-header>
-                    <ons-list-item ng-repeat="stamp_book in stamp_books | filter : {active_flg: false}">
-                        <div class="left">
-                            <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
-                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
-                        </div>
-                        <div class="center" ng-click="nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}})">
-                            {{stamp_book.name}}
-                        </div>
-                        <div class="right" style="padding-right: 10px;">
-                            <ons-button modifier="outline" ng-click="activate_stamp_book(stamp_book, $event)">
-                                    参加する
-                            </ons-button>
-                        </div>
-                    </ons-list-item>
+                    <div id="inactivated" style="display: none;">
+                        <ons-list-header> 未参加のスタンプラリー一覧 </ons-list-header>
+                        <ons-list-item ng-repeat="stamp_book in stamp_books | filter : {active_flg: false}">
+                            <div class="left">
+                                <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
+                                <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                            </div>
+                            <div class="center" ng-click="nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}})">
+                                {{stamp_book.name}}
+                            </div>
+                            <div class="right" style="padding-right: 10px;">
+                                <ons-button modifier="outline" ng-click="activate_stamp_book(stamp_book, $event)">
+                                        参加する
+                                </ons-button>
+                            </div>
+                        </ons-list-item>
+                    </div>
 
                 </ons-list>
 
