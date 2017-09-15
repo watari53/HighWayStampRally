@@ -310,12 +310,38 @@ ons.bootstrap()
             nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}});
         };
     })
-    .controller('StampsController', function($scope, DataService) {
+    .controller('StampBookDetailController', function($scope, DataService) {
         console.log("stamps controller");
 
         $scope.stamp_book = $scope.nav.topPage.data.stamp_book;
         $scope.stamps = DataService.getStampsByStampBookId($scope.stamp_book.id);
         // $scope.stamp_book_id = options.stamp_book_id;
+
+        // map
+        var map;
+        var bounds_array = [];
+        var MAP_INIT_FLG = 0;
+        var INIT_PLACE = [35.681167, 139.767052]
+        if (MAP_INIT_FLG == 0) {
+            console.log("map init");
+            MAP_INIT_FLG = 1;
+
+            map = L.map('stamp_book_detail_map').setView(INIT_PLACE, 10);
+
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            console.log("set markers");
+            var stamps = $scope.stamps;
+            for (var i = 0; i < stamps.length; i++) {
+                f = stamps[i];
+                L.marker([f.lat, f.lng]).addTo(map)
+                    .bindPopup(f.name);
+                bounds_array.push([f.lat, f.lng]);
+            }
+            map.fitBounds(bounds_array);
+        }
 
     })
     // require stamp object

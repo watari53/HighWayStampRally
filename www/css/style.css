@@ -7,7 +7,7 @@
 /* stamprally list page */
 
 
-/* facilities */
+/* stamp books list */
 .list-item-container {
   line-height: 1;
   padding: 15px 0px 15px 15px;
@@ -53,7 +53,8 @@
   line-height: 1.2;
   font-size: 13px;
 }
-/* end facilities */
+
+/* end stamp books list */
 
 /* check in */
 .check-in-image {

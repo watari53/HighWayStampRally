@@ -70,9 +70,9 @@
             </ons-toolbar>
             <div class="content" style="text-align: center">
                 <img id="top-image" src="./images/top-image.jpg"></img>
-                <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-                    高速道路のSA・PAで
-                    <br>旅の思い出をあつめませんか？
+                <p style="text-align: center; opacity: 0.6; padding-top: 10px;">
+                    スタンプラリーで巡る
+                    <br>日本の観光スポット
                 </p>
                 <ons-list>
                     <ons-list-header>Menu</ons-list-header>
@@ -81,8 +81,8 @@
                             <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
                         </div>
                         <div class="center">
-                            <span class="list-item__title">チェックイン</span>
-                            <span class="list-item__subtitle">チェックインしてスタンプを記録</span>
+                            <span class="list-item__title">スタンプを押す</span>
+                            <span class="list-item__subtitle">チェックインしてスタンプを押す</span>
                         </div>
                     </ons-list-item>
                     <ons-list-item modifier="chevron" ng-click="nav.pushPage('collection.html')">
@@ -90,8 +90,8 @@
                             <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
                         </div>
                         <div class="center">
-                            <span class="list-item__title">スタンプ帳</span>
-                            <span class="list-item__subtitle">取得したスタンプ一覧</span>
+                            <span class="list-item__title">スタンプラリー</span>
+                            <span class="list-item__subtitle">スタンプラリー一覧</span>
                         </div>
                     </ons-list-item>
                     <ons-list-item modifier="chevron" ng-click="nav.pushPage('map.html')">
@@ -99,8 +99,8 @@
                             <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
                         </div>
                         <div class="center">
-                            <span class="list-item__title">施設マップ</span>
-                            <span class="list-item__subtitle">スタンプを設置している施設一覧</span>
+                            <span class="list-item__title">足跡マップ</span>
+                            <span class="list-item__subtitle">軌跡を地図で振り返る</span>
                         </div>
                     </ons-list-item>
                 </ons-list>
@@ -236,19 +236,28 @@
 
     <!-- stamps by stamprally id -->
     <ons-template id="stamps.html">
-        <ons-page ng-controller="StampsController">
+        <ons-page ng-controller="StampBookDetailController">
 
             <ons-toolbar>
                 <div class="left" style="line-height: 44px">
                     <ons-back-button>Back</ons-back-button>
                 </div>
-                <div class="center">{{stamp_book.name}}のSA・PA一覧</div>
+                <div class="center">スタンプラリー詳細</div>
                 <div class="right" style="line-height: 44px">
                 </div>
             </ons-toolbar>
 
+            <ons-list modifier="inset" style="margin: 10px 5px">
+                <ons-list-item>
+                    <div class="detail-title">{{stamp_book.name}}</div>
+                </ons-list-item>
+            </ons-list>
+
+                <div id="stamp_book_detail_map" style="margin: 0 10px 10px 10px; height: 40%; position: relative;" tabindex="0";> </div>
+
             <ons-list>
 
+                <ons-list-header class="title">スタンプ一覧</ons-list-header>
                 <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='stamp in stamps'>
                     <ons-row ng-click="nav.pushPage('stamp_detail.html', {data: {stamp: stamp}})">
                         <ons-col width="30%">
@@ -311,7 +320,7 @@
                         <ons-icon icon="fa-calendar"></ons-icon>
                     </div>
                     <div class="center">
-                        {{stamp.get_date}}更新
+                        {{stamp.get_date}}
                     </div>
                 </ons-list-item>
                 <ons-list-item>
@@ -344,8 +353,9 @@
                     <ons-toolbar-button><ons-icon icon="ion-home"></ons-icon></ons-toolbar-button>
                 </div>
             </ons-toolbar>
-            <div id="map" style="height: 100%; position: relative;" tabindex="0">
-            </div>
+
+            <div id="map" style="height: 100%; position: relative;" tabindex="0"> </div>
+
         </ons-page>
     </ons-template>
 </body>
