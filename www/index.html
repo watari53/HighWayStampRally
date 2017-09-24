@@ -1,363 +1,364 @@
-<!DOCTYPE HTML>
-<html>
+    <!DOCTYPE HTML>
+    <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * 'unsafe-inline' data: content:">
-    <script src="lib/angular/angular.min.js"></script>
-    <script src="components/loader.js"></script>
-    <script src="lib/onsenui/js/onsenui.min.js"></script>
-    <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
-    <script src="components/main.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * 'unsafe-inline' data: content:">
+        <script src="lib/angular/angular.min.js"></script>
+        <script src="components/loader.js"></script>
+        <script src="lib/onsenui/js/onsenui.min.js"></script>
+        <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+        <script src="components/main.js"></script>
 
 
-    <link rel="stylesheet" href="components/loader.css">
-    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
-    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
-    <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="components/loader.css">
+        <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+        <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+        <link rel="stylesheet" href="css/style.css">
 
-    <script>
-        ons.ready(function() {
-            console.log("Onsen UI is ready!");
-        });
-    </script>
-</head>
+        <script>
+            ons.ready(function() {
+                console.log("Onsen UI is ready!");
+            });
+        </script>
+    </head>
 
-<body>
+    <body>
 
-    <ons-navigator id="nav" var="nav" page="home.html">
-        <ons-page>
-            <ons-splitter ng-controller="AppController as app" var="splitter">
-                <ons-splitter-side side="left" width="220px" collapse swipeable>
-                    <ons-page>
-                        <ons-list>
-                            <ons-list-header>Menu</ons-list-header>
-                            <ons-list-item ng-click="app.load('home.html')" tappable>
+        <ons-navigator id="nav" var="nav" page="home.html">
+            <ons-page>
+                <ons-splitter ng-controller="AppController as app" var="splitter">
+                    <ons-splitter-side side="left" width="220px" collapse swipeable>
+                        <ons-page>
+                            <ons-list>
+                                <ons-list-header>Menu</ons-list-header>
+                                <ons-list-item ng-click="app.load('home.html')" tappable>
 
-                              <div class="left">
-                                <ons-icon icon="md-home" class="list-item__icon"></ons-icon>
-                              </div>
-                              <div class="center">
-                                ホーム
-                              </div>
-                            </ons-list-item>
-                            <ons-list-item ng-click="app.load('collection.html')" tappable>
-                                スタンプラリー
-                            </ons-list-item>
-                            <ons-list-item ng-click="app.load('map.html')" tappable>
-                                スタンプ施設マップ
-                            </ons-list-item>
-                        </ons-list>
-                    </ons-page>
-                </ons-splitter-side>
-                <ons-splitter-content page="home.html"></ons-splitter-content>
-            </ons-splitter>
-        </ons-page>
-    </ons-navigator>
+                                  <div class="left">
+                                    <ons-icon icon="md-home" class="list-item__icon"></ons-icon>
+                                  </div>
+                                  <div class="center">
+                                    ホーム
+                                  </div>
+                                </ons-list-item>
+                                <ons-list-item ng-click="app.load('collection.html')" tappable>
+                                    スタンプラリー
+                                </ons-list-item>
+                                <ons-list-item ng-click="app.load('map.html')" tappable>
+                                    スタンプ施設マップ
+                                </ons-list-item>
+                            </ons-list>
+                        </ons-page>
+                    </ons-splitter-side>
+                    <ons-splitter-content page="home.html"></ons-splitter-content>
+                </ons-splitter>
+            </ons-page>
+        </ons-navigator>
 
-    <ons-template id="home.html">
-        <ons-page ng-controller="HomeController">
-            <ons-toolbar>
-                <div class="left">
-                    <ons-toolbar-button ng-click="app.toggle()">
-                        <ons-icon icon="md-menu"></ons-icon>
-                    </ons-toolbar-button>
-                </div>
-                <div class="center">
-                    ホーム
-                </div>
-            </ons-toolbar>
-            <div class="content" style="text-align: center">
-                <img id="top-image" src="./images/top-image.jpg"></img>
-                <p style="text-align: center; opacity: 0.6; padding-top: 10px;">
-                    スタンプラリーで巡る
-                    <br>日本の観光スポット
-                </p>
-                <ons-list>
-                    <ons-list-header>Menu</ons-list-header>
-                    <ons-list-item modifier="chevron" ng-click="check_in()">
-                        <div class="left">
-                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
-                        </div>
-                        <div class="center">
-                            <span class="list-item__title">スタンプを押す</span>
-                            <span class="list-item__subtitle">チェックインしてスタンプを押す</span>
-                        </div>
-                    </ons-list-item>
-                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('collection.html')">
-                        <div class="left">
-                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
-                        </div>
-                        <div class="center">
-                            <span class="list-item__title">スタンプラリー</span>
-                            <span class="list-item__subtitle">スタンプラリー一覧</span>
-                        </div>
-                    </ons-list-item>
-                    <ons-list-item modifier="chevron" ng-click="nav.pushPage('map.html')">
-                        <div class="left">
-                            <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
-                        </div>
-                        <div class="center">
-                            <span class="list-item__title">足跡マップ</span>
-                            <span class="list-item__subtitle">軌跡を地図で振り返る</span>
-                        </div>
-                    </ons-list-item>
-                </ons-list>
-            </div>
-        </ons-page>
-    </ons-template>
-
-    <ons-modal var="getLocationModal">
-        位置情報を取得中・・・
-    </ons-modal>
-
-    <ons-template id="check_in.html">
-        <ons-page ng-controller="CheckInController">
-
-            <ons-toolbar>
-                <div class="left" style="line-height: 44px">
-                    <ons-back-button>Back</ons-back-button>
-                </div>
-                <div class="center">チェックイン</div>
-                <div class="right" style="line-height: 44px">
-                </div>
-            </ons-toolbar>
-
-            <p>チェックインする施設を選択します</p>
-            <div id="check-in-map" style="height: 40%; position: relative;" tabindex="0">
-            </div>
-
-            <ons-row style="margin-top: 20px;">
-                <ons-col>
-                    <div class="card" style="background-image: url({{image_url}});"> </div>
-                </ons-col>
-
-                <ons-col>
-                    <ons-button onclick="app.showFromObject()">画像を登録する</ons-button>
-                </ons-col>
-            </ons-row>
-
-            <div style="margin-top: 20px; padding: 20px;">
-                <ons-button id="check-in-btn" ng-click="checkin_submit()" modifier="large" disabled="true">チェックイン</ons-button>
-            </div>
-
-        </ons-page>
-    
-    </ons-template>
-
-    <ons-template id="press_stamp.html">
-        <ons-dialog style="height: 100%;" var="stamp_dialog" cancelable>
-
-            <ons-toolbar inline>
-                <div class="center">
-                    おめでとうございます！
-                </div>
-            </ons-toolbar>
-
-            <div style="text-align: center">
-                <p>
-                    スタンプをゲット！
-                </p>
-
-                <p>
-                    <ons-button onclick="stamp_dialog.hide()">Close</ons-button>
-                </p>
-            </div>
-        </ons-dialog>
-    </ons-template>
-
-    <ons-template id="collection.html">
-
-        <ons-page ng-controller="StampBooksController">
-            <ons-toolbar>
-                <div class="left" style="line-height: 44px">
-                    <ons-back-button>Back</ons-back-button>
-                </div>
-                <div class="center">スタンプラリー</div>
-                <div class="right" style="line-height: 44px">
-                </div>
-            </ons-toolbar>
-
-            <div class="content" style="text-align: center">
-
-                <div class="segment segment--material" style="width: 70%; margin: 10px auto;">
-                  <div class="segment__item segment--material__item">
-                    <input type="radio" class="segment__input segment--material__input" name="segment" value="0" checked>
-                    <button class="segment__button segment--material__button">参加済み</button>
-                  </div>
-                  <div class="segment__item segment--material__item">
-                    <input type="radio" class="segment__input segment--material__input" value="1" name="segment">
-                    <button class="segment__button segment--material__button" ng-click="togglePage()">未参加</button>
-                  </div>
-                </div>
-
-                <ons-list>
-                    <div id="activated">
-                        <ons-list-header> 参加済みのスタンプラリー一覧 </ons-list-header>
-                        <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)" ng-repeat="stamp_book in stamp_books | filter : {active_flg: true}">
+        <ons-template id="home.html">
+            <ons-page ng-controller="HomeController">
+                <ons-toolbar>
+                    <div class="left">
+                        <ons-toolbar-button ng-click="app.toggle()">
+                            <ons-icon icon="md-menu"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center">
+                        ホーム
+                    </div>
+                </ons-toolbar>
+                <div class="content" style="text-align: center">
+                    <img id="top-image" src="./images/top-image.jpg"></img>
+                    <p style="text-align: center; opacity: 0.6; padding-top: 10px;">
+                        スタンプラリーで巡る
+                        <br>日本の観光スポット
+                    </p>
+                    <ons-list>
+                        <ons-list-header>Menu</ons-list-header>
+                        <ons-list-item modifier="chevron" ng-click="check_in()">
                             <div class="left">
-                                <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
                                 <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
                             </div>
                             <div class="center">
-                                {{stamp_book.name}}
-                            </div>
-                            <div class="right" style="padding-right: 40px;">
-                                <!-- {{stamp_book.get_stamp_num}} / {{stamp_book.all_stamps_num}} -->
-                                <ons-progress-circular value="{{stamp_book.get_stamp_num/stamp_book.all_stamps_num * 100}}"></ons-progress-circular>
+                                <span class="list-item__title">スタンプを押す</span>
+                                <span class="list-item__subtitle">チェックインしてスタンプを押す</span>
                             </div>
                         </ons-list-item>
-                    </div>
-
-                    <div id="inactivated" style="display: none;">
-                        <ons-list-header> 未参加のスタンプラリー一覧 </ons-list-header>
-                        <ons-list-item ng-repeat="stamp_book in stamp_books | filter : {active_flg: false}">
+                        <ons-list-item modifier="chevron" ng-click="nav.pushPage('collection.html')">
                             <div class="left">
-                                <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
                                 <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
                             </div>
-                            <div class="center" ng-click="nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}})">
-                                {{stamp_book.name}}
-                            </div>
-                            <div class="right" style="padding-right: 10px;">
-                                <ons-button modifier="outline" ng-click="activate_stamp_book(stamp_book, $event)">
-                                        参加する
-                                </ons-button>
+                            <div class="center">
+                                <span class="list-item__title">スタンプラリー</span>
+                                <span class="list-item__subtitle">スタンプラリー一覧</span>
                             </div>
                         </ons-list-item>
+                        <ons-list-item modifier="chevron" ng-click="nav.pushPage('map.html')">
+                            <div class="left">
+                                <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                            </div>
+                            <div class="center">
+                                <span class="list-item__title">足跡マップ</span>
+                                <span class="list-item__subtitle">軌跡を地図で振り返る</span>
+                            </div>
+                        </ons-list-item>
+                    </ons-list>
+                </div>
+            </ons-page>
+        </ons-template>
+
+        <ons-modal var="getLocationModal">
+            位置情報を取得中・・・
+        </ons-modal>
+
+        <ons-template id="check_in.html">
+            <ons-page ng-controller="CheckInController">
+
+                <ons-toolbar>
+                    <div class="left" style="line-height: 44px">
+                        <ons-back-button>Back</ons-back-button>
                     </div>
+                    <div class="center">チェックイン</div>
+                    <div class="right" style="line-height: 44px">
+                    </div>
+                </ons-toolbar>
+
+                <p>チェックインする施設を選択します</p>
+                <div id="check-in-map" style="height: 40%; position: relative;" tabindex="0">
+                </div>
+
+                <ons-row style="margin-top: 20px;">
+                    <ons-col>
+                        <div class="card" style="background-image: url({{image_url}});"> </div>
+                    </ons-col>
+
+                    <ons-col>
+                        <ons-button onclick="app.showFromObject()">画像を登録する</ons-button>
+                    </ons-col>
+                </ons-row>
+
+                <div style="margin-top: 20px; padding: 20px;">
+                    <ons-button id="check-in-btn" ng-click="checkin_submit()" modifier="large" disabled="true">チェックイン</ons-button>
+                </div>
+
+            </ons-page>
+        
+        </ons-template>
+
+        <ons-template id="press_stamp.html">
+            <ons-dialog style="height: 100%;" var="stamp_dialog" cancelable>
+
+                <ons-toolbar inline>
+                    <div class="center">
+                        おめでとうございます！
+                    </div>
+                </ons-toolbar>
+
+                <div style="text-align: center">
+                    <p>
+                        スタンプをゲット！
+                    </p>
+
+                    <p>
+                        <ons-button onclick="stamp_dialog.hide()">Close</ons-button>
+                    </p>
+                </div>
+            </ons-dialog>
+        </ons-template>
+
+        <ons-template id="collection.html">
+
+            <ons-page ng-controller="StampBooksController">
+                <ons-toolbar>
+                    <div class="left" style="line-height: 44px">
+                        <ons-back-button>Back</ons-back-button>
+                    </div>
+                    <div class="center">スタンプラリー</div>
+                    <div class="right" style="line-height: 44px">
+                    </div>
+                </ons-toolbar>
+
+                <div class="content" style="text-align: center">
+
+                    <div class="segment segment--material" style="width: 70%; margin: 10px auto;">
+                      <div class="segment__item segment--material__item">
+                        <input type="radio" class="segment__input segment--material__input" value="0" name="segment" checked>
+                        <button class="segment__button segment--material__button"><ons-icon icon="fa-list">参加可能</ons-icon></button>
+                      </div>
+                      <div class="segment__item segment--material__item">
+                        <input type="radio" class="segment__input segment--material__input" name="segment" value="1">
+                        <button class="segment__button segment--material__button"><ons-icon icon="fa-hourglass-start">参加中</ons-icon></button>
+                      </div>
+                    </div>
+
+                    <ons-list>
+                        <div id="activated">
+                            <ons-list-header> 未参加のスタンプラリー一覧 </ons-list-header>
+                            <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)" ons-lazy-repeat="inactivated_stamp_books_delegate">
+                                <div class="left">
+                                    <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
+                                    <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                                </div>
+                                <div class="center">
+                                    {{stamp_book.name}}
+                                </div>
+                            </ons-list-item>
+                        </div>
+
+                        <div id="inactivated" style="display: none;">
+                            <ons-list-header> 参加済みのスタンプラリー一覧 </ons-list-header>
+                            <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)"  ons-lazy-repeat="activated_stamp_books_delegate">
+                                <div class="left">
+                                    <!-- <div class="list-item__thumbnail" style="background-image: url({{image_url}});"> </div> -->
+                                    <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                                </div>
+                                <div class="center">
+                                    {{ stamp_book.name }}
+                                </div>
+                                <div class="right" style="padding-right: 40px;">
+                                    <!-- {{stamp_book.get_stamp_num}} / {{stamp_book.all_stamps_num}} -->
+                                    <ons-progress-circular value="{{stamp_book.get_stamp_num/stamp_book.all_stamps_num * 100}}"></ons-progress-circular>
+                                </div>
+                            </ons-list-item>
+                        </div>
+
+                    </ons-list>
+
+                </div>
+            </ons-page>
+
+        </ons-template>
+
+        <!-- stamps by stamprally id -->
+        <ons-template id="stamps.html">
+            <ons-page ng-controller="StampBookDetailController">
+
+                <ons-toolbar>
+                    <div class="left" style="line-height: 44px">
+                        <ons-back-button>Back</ons-back-button>
+                    </div>
+                    <div class="center">スタンプラリー詳細</div>
+                    <div class="right" style="line-height: 44px">
+                    </div>
+                </ons-toolbar>
+
+                <ons-list modifier="inset" style="margin: 10px 5px">
+                    <ons-list-item>
+                        <div class="detail-title">{{stamp_book.name}}</div>
+                        <div class="right" style="padding-right: 10px;" style="font-size: .8rem">
+                            <ons-button modifier="outline" ng-click="activate_stamp_book(stamp_book, $event)">
+                                    {{active_message}}
+                            </ons-button>
+                        </div>
+                    </ons-list-item>
+                </ons-list>
+
+                    <div id="stamp_book_detail_map" style="margin: 0 10px 10px 10px; height: 40%; position: relative;" tabindex="0";> </div>
+
+                <ons-list>
+
+                    <ons-list-header class="title">スタンプ一覧</ons-list-header>
+                    <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='stamp in stamps'>
+                        <ons-row ng-click="nav.pushPage('stamp_detail.html', {data: {stamp: stamp}})">
+                            <ons-col width="30%">
+                                <!--<img src="{{stamp.image_url}}" class="thumbnail">-->
+                                <div class="list-thumbnail" style="background-image: url({{stamp.image_url}});"> </div>
+
+                            </ons-col>
+                            <ons-col>
+                                <div class="name">
+                                    {{stamp.name}}
+                                </div>
+                                <div class="location">
+                                    <i class="fa fa-map-marker"></i> {{stamp.stamp_book_name}}
+                                </div>
+                                <div class="desc">
+                                    <i class="fa fa-calendar"></i> {{stamp.get_date}}
+                                </div>
+                            </ons-col>
+                            <ons-col width="40px"></ons-col>
+                        </ons-row>
+                    </ons-list-item>
 
                 </ons-list>
 
-            </div>
-        </ons-page>
-    </ons-template>
+            </ons-page>
+        </ons-template>
 
-    <!-- stamps by stamprally id -->
-    <ons-template id="stamps.html">
-        <ons-page ng-controller="StampBookDetailController">
+        <ons-template id='stamp_detail.html'>
+            <ons-page modifier="shop-details" ng-controller='StampDetailController'>
 
-            <ons-toolbar>
-                <div class="left" style="line-height: 44px">
-                    <ons-back-button>Back</ons-back-button>
-                </div>
-                <div class="center">スタンプラリー詳細</div>
-                <div class="right" style="line-height: 44px">
-                </div>
-            </ons-toolbar>
-
-            <ons-list modifier="inset" style="margin: 10px 5px">
-                <ons-list-item>
-                    <div class="detail-title">{{stamp_book.name}}</div>
-                </ons-list-item>
-            </ons-list>
-
-                <div id="stamp_book_detail_map" style="margin: 0 10px 10px 10px; height: 40%; position: relative;" tabindex="0";> </div>
-
-            <ons-list>
-
-                <ons-list-header class="title">スタンプ一覧</ons-list-header>
-                <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='stamp in stamps'>
-                    <ons-row ng-click="nav.pushPage('stamp_detail.html', {data: {stamp: stamp}})">
-                        <ons-col width="30%">
-                            <!--<img src="{{stamp.image_url}}" class="thumbnail">-->
-                            <div class="list-thumbnail" style="background-image: url({{stamp.image_url}});"> </div>
-
-                        </ons-col>
-                        <ons-col>
-                            <div class="name">
-                                {{stamp.name}}
-                            </div>
-                            <div class="location">
-                                <i class="fa fa-map-marker"></i> {{stamp.stamp_book_name}}
-                            </div>
-                            <div class="desc">
-                                <i class="fa fa-calendar"></i> {{stamp.get_date}}
-                            </div>
-                        </ons-col>
-                        <ons-col width="40px"></ons-col>
-                    </ons-row>
-                </ons-list-item>
-
-            </ons-list>
-
-        </ons-page>
-    </ons-template>
-
-    <ons-template id='stamp_detail.html'>
-        <ons-page modifier="shop-details" ng-controller='StampDetailController'>
-
-            <ons-toolbar>
-                <div class="left" style="line-height: 44px">
-                    <ons-back-button>Back</ons-back-button>
-                </div>
-                <div class="center">{{stamp.name}}</div>
-
-                <div class="right" style="line-height: 44px">
-                </div>
-            </ons-toolbar>
-
-            <ons-list modifier="inset" style="margin-top: 10px">
-                <ons-list-item style="text-align: center">
-                    <div class="detail-image" style="background-image: url({{stamp.image_url}});"> </div>
-                </ons-list-item>
-            </ons-list>
-
-            <ons-list modifier="inset" style="margin-top: 20px">
-                <ons-list-header class="title">Information</ons-list-header>
-                <ons-list-item>
-                    <div class="left">
-                        <ons-icon icon="fa-map-marker"></ons-icon>
+                <ons-toolbar>
+                    <div class="left" style="line-height: 44px">
+                        <ons-back-button>Back</ons-back-button>
                     </div>
-                    <div class="center">
-                        {{stamp.address}}
+                    <div class="center">{{stamp.name}}</div>
 
+                    <div class="right" style="line-height: 44px">
                     </div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div class="left">
-                        <ons-icon icon="fa-calendar"></ons-icon>
-                    </div>
-                    <div class="center">
-                        {{stamp.get_date}}
-                    </div>
-                </ons-list-item>
-                <ons-list-item>
-                    <div class="left">
-                        <ons-icon icon="fa-book"></ons-icon>
-                    </div>
-                    <div class="center">
-                        {{stamp.stamp_book_name}}
+                </ons-toolbar>
 
-                    </div>
-                </ons-list-item>
-            </ons-list>
+                <ons-list modifier="inset" style="margin-top: 10px">
+                    <ons-list-item style="text-align: center">
+                        <div class="detail-image" style="background-image: url({{stamp.image_url}});"> </div>
+                    </ons-list-item>
+                </ons-list>
 
-            <div style="margin-top: 20px; padding: 20px;">
-                <ons-button modifier='large' ng-click="go_home()">
-                    トップページへ戻る
-                </ons-button>
-            </div>
-        </ons-page>
-    </ons-template>
+                <ons-list modifier="inset" style="margin-top: 20px">
+                    <ons-list-header class="title">Information</ons-list-header>
+                    <ons-list-item>
+                        <div class="left">
+                            <ons-icon icon="fa-map-marker"></ons-icon>
+                        </div>
+                        <div class="center">
+                            {{stamp.address}}
 
-    <ons-template id="map.html">
-        <ons-page ng-controller="MapController">
-            <ons-toolbar>
-                <div class="left" style="line-height: 44px">
-                    <ons-back-button>Back</ons-back-button>
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item>
+                        <div class="left">
+                            <ons-icon icon="fa-calendar"></ons-icon>
+                        </div>
+                        <div class="center">
+                            {{stamp.get_date}}
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item>
+                        <div class="left">
+                            <ons-icon icon="fa-book"></ons-icon>
+                        </div>
+                        <div class="center">
+                            {{stamp.stamp_book_name}}
+
+                        </div>
+                    </ons-list-item>
+                </ons-list>
+
+                <div style="margin-top: 20px; padding: 20px;">
+                    <ons-button modifier='large' ng-click="go_home()">
+                        トップページへ戻る
+                    </ons-button>
                 </div>
-                <div class="center">スタンプ施設マップ</div>
-                <div class="right" style="line-height: 44px">
-                    <ons-toolbar-button><ons-icon icon="ion-home"></ons-icon></ons-toolbar-button>
-                </div>
-            </ons-toolbar>
+            </ons-page>
+        </ons-template>
 
-            <div id="map" style="height: 100%; position: relative;" tabindex="0"> </div>
+        <ons-template id="map.html">
+            <ons-page ng-controller="MapController">
+                <ons-toolbar>
+                    <div class="left" style="line-height: 44px">
+                        <ons-back-button>Back</ons-back-button>
+                    </div>
+                    <div class="center">スタンプ施設マップ</div>
+                    <div class="right" style="line-height: 44px">
+                        <ons-toolbar-button><ons-icon icon="ion-home"></ons-icon></ons-toolbar-button>
+                    </div>
+                </ons-toolbar>
 
-        </ons-page>
-    </ons-template>
-</body>
+                <div id="map" style="height: 100%; position: relative;" tabindex="0"> </div>
 
-</html>
+            </ons-page>
+        </ons-template>
+    </body>
+
+    </html>
