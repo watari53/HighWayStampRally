@@ -304,34 +304,6 @@
                 }
             });
 
-            function make_delegate(stamp_books) {
-                var stamp_books = stamp_books;
-
-                return {
-                    configureItemScope: function(index, itemScope) {
-                        itemScope.stamp_book = stamp_books[index];
-                    },
-                    countItems: function() {
-                        return stamp_books.length;
-                    },
-                    calculateItemHeight: function() {
-                        return ons.platform.isAndroid() ? 48 : 44;
-                    }
-                };
-            }
-
-            var activated_stamp_books = $scope.stamp_books.filter(function(item, index){
-                if (item.active_flg == true) return true;
-            });
-            // alert(activated_stamp_books.length);
-            $scope.activated_stamp_books_delegate = make_delegate(activated_stamp_books);
-
-            var inactivated_stamp_books = $scope.stamp_books.filter(function(item, index){
-                if (item.active_flg == false) return true;
-            });
-            // alert(activated_stamp_books.length);
-            $scope.inactivated_stamp_books_delegate = make_delegate(inactivated_stamp_books);
-
             $scope.go_stamps = function(stamp_book) {
                 var stamp_book = stamp_book;
                 nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}});

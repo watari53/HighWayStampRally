@@ -195,7 +195,22 @@
                     <ons-list>
                         <div id="activated">
                             <ons-list-header> 未参加のスタンプラリー一覧 </ons-list-header>
-                            <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)" ons-lazy-repeat="inactivated_stamp_books_delegate">
+                            <ons-list-item modifier="chevron" ng-repeat="stamp_book in stamp_books | filter : {active_flg: false} | limitTo: 50">
+                                <div class="left">
+                                    <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
+                                    <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                                </div>
+                                <div class="center" ng-click="nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}})">
+                                    {{stamp_book.name}}
+                                </div>
+                                <div class="right" style="padding-right: 10px;">
+                                </div>
+                            </ons-list-item>
+                        </div>
+
+                        <div id="inactivated" style="display: none;">
+                            <ons-list-header> 参加済みのスタンプラリー一覧 </ons-list-header>
+                            <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)" ng-repeat="stamp_book in stamp_books | filter : {active_flg: true}">
                                 <div class="left">
                                     <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
                                     <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
@@ -203,26 +218,12 @@
                                 <div class="center">
                                     {{stamp_book.name}}
                                 </div>
-                            </ons-list-item>
-                        </div>
-
-                        <div id="inactivated" style="display: none;">
-                            <ons-list-header> 参加済みのスタンプラリー一覧 </ons-list-header>
-                            <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)"  ons-lazy-repeat="activated_stamp_books_delegate">
-                                <div class="left">
-                                    <!-- <div class="list-item__thumbnail" style="background-image: url({{image_url}});"> </div> -->
-                                    <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
-                                </div>
-                                <div class="center">
-                                    {{ stamp_book.name }}
-                                </div>
                                 <div class="right" style="padding-right: 40px;">
                                     <!-- {{stamp_book.get_stamp_num}} / {{stamp_book.all_stamps_num}} -->
                                     <ons-progress-circular value="{{stamp_book.get_stamp_num/stamp_book.all_stamps_num * 100}}"></ons-progress-circular>
                                 </div>
                             </ons-list-item>
                         </div>
-
                     </ons-list>
 
                 </div>
