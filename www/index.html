@@ -78,7 +78,7 @@
                         <ons-list-header>Menu</ons-list-header>
                         <ons-list-item modifier="chevron" ng-click="check_in()">
                             <div class="left">
-                                <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                                <img class="list-item__thumbnail" src="./images/check_in.png">
                             </div>
                             <div class="center">
                                 <span class="list-item__title">スタンプを押す</span>
@@ -87,7 +87,8 @@
                         </ons-list-item>
                         <ons-list-item modifier="chevron" ng-click="nav.pushPage('collection.html')">
                             <div class="left">
-                                <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                                <img class="list-item__thumbnail" src="./images/stamp_rally.png">
+
                             </div>
                             <div class="center">
                                 <span class="list-item__title">スタンプラリー</span>
@@ -96,9 +97,9 @@
                         </ons-list-item>
                         <ons-list-item modifier="chevron" ng-click="nav.pushPage('map.html')">
                             <div class="left">
-                                <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                                <img class="list-item__thumbnail" src="./images/footprint.png">
                             </div>
-                            <div class="center">
+                            <div class="center"ｋｋ
                                 <span class="list-item__title">足跡マップ</span>
                                 <span class="list-item__subtitle">軌跡を地図で振り返る</span>
                             </div>
@@ -248,9 +249,7 @@
                     <ons-list-item>
                         <div class="detail-title">{{stamp_book.name}}</div>
                         <div class="right" style="padding-right: 10px;" style="font-size: .8rem">
-                            <ons-button modifier="outline" ng-click="activate_stamp_book(stamp_book, $event)">
-                                    {{active_message}}
-                            </ons-button>
+                            <ons-button modifier="outline" ng-click="select(stamp_book, $event)">{{active_message}}</ons-button>
                         </div>
                     </ons-list-item>
                 </ons-list>

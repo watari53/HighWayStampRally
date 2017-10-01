@@ -311,24 +311,71 @@
         })
         .controller('StampBookDetailController', function($scope, DataService) {
             console.log("stamps controller");
-            $scope.active_message = "参加する"; // 参加中 or 参加する
+            var JOINED = "参加中";
+            var NOT_JOINED = "参加する";
+            $scope.active_message = NOT_JOINED; // 参加中 or 参加する
 
             $scope.stamp_book = $scope.nav.topPage.data.stamp_book;
             $scope.stamps = DataService.getStampsByStampBookId($scope.stamp_book.id);
 
             if ($scope.stamp_book.active_flg == true) {
-                $scope.active_message = "参加中";
+                $scope.active_message = JOINED;
             }
 
-            $scope.activate_stamp_book = function(stamp_book, e) {
+            $scope.select = function(stamp_book, e) {
+                console.log("select join or not join");
+                if(e.target.innerHTML == NOT_JOINED) {
+                    join(stamp_book, e);
+                } else if(e.target.innerHTML == JOINED) {
+                    not_join(stamp_book, e);
+                }
+            }
+
+            function join(stamp_book, e) {
+                ons.notification.confirm({
+                    message: stamp_book.name + '<br>' + 'このスタンプに参加しますか?',
+                    callback: function(answer) {
+                        if (answer == 1) { // yes
+                            activate_stamp_book(stamp_book, e);
+                        } else {  // no
+                            console.log("canceled");
+                        }
+                    }
+                });
+            }
+
+            function activate_stamp_book(stamp_book, e) {
                 if (stamp_book.active_flg == false) {
-                    var activated_status = '参加中';
+                    var activated_status = JOINED;
                     console.log("activate stamp book: id=" + stamp_book.id);
                     e.target.innerHTML = activated_status;
                     stamp_book.active_flg = true;
                     DataService.updateStampBookData(stamp_book);
                 }
-            };
+            }
+
+            function not_join(stamp_book, e) {
+                ons.notification.confirm({
+                    message: stamp_book.name + '<br>' + 'このスタンプを取り消しますか?',
+                    callback: function(answer) {
+                        if (answer == 1) { // yes
+                            inactivate_stamp_book(stamp_book, e);
+                        } else {  // no
+                            console.log("canceled");
+                        }
+                    }
+                });
+            }
+
+            function inactivate_stamp_book(stamp_book, e) {
+                if (stamp_book.active_flg == true) {
+                    var activated_status = NOT_JOINED;
+                    console.log("activate stamp book: id=" + stamp_book.id);
+                    e.target.innerHTML = activated_status;
+                    stamp_book.active_flg = false;
+                    DataService.updateStampBookData(stamp_book);
+                }
+            }
 
             // map
             var map;
