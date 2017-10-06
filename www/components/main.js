@@ -7,118 +7,120 @@
 
         .factory('DataService', function($http) {
             var service = {};
-            service.data = {
-                "Stamps": [{
-                    "id"             : 0,
-                    "name"           : "海老名SA",
-                    "lat"            : 35.431248,
-                    "lng"            : 139.401082,
-                    "address"        : '神奈川県川崎市中原区宮内1-3-3',
-                    "image_url"      : "./images/no-image.jpg",
-                    "memo"           : "メロンパンが名物",
-                    "get_date"       : null,
-                    "stamp_book_id"  : 0,
-                    "stamp_book_name": "東名高速道路",
-                }, {
-                    "id"             : 1,
-                    "name"           : "足柄SA",
-                    "lat"            : 35.313659,
-                    "lng"            : 138.966701,
-                    "address"        : '神奈川県川崎市中原区宮内1-3-3',
-                    "image_url"      : "./images/dummy-image.jpg",
-                    "memo"           : "カレーパンが名物",
-                    "get_date"       : "2017-6-20",
-                    "stamp_book_id"  : 0,
-                    "stamp_book_name": "東名高速道路",
-                }, {
-                    "id"             : 2,
-                    "name"           : "談合坂SA",
-                    "lat"            : 35.628314,
-                    "lng"            : 139.046914,
-                    "address"        : '神奈川県川崎市中原区宮内1-3-3',
-                    "image_url"      : "./images/no-image.jpg",
-                    "memo"           : "こっぺパンが名物",
-                    "get_date"       : null,
-                    "stamp_book_id"  : 1,
-                    "stamp_book_name": "中央自動車道",
-                }, {
-                    "id"             : 3,
-                    "name"           : "石川PA",
-                    "lat"            : 35.677597,
-                    "lng"            : 139.37142,
-                    "address"        : '神奈川県川崎市中原区宮内1-3-3',
-                    "image_url"      : "./images/no-image.jpg",
-                    "memo"           : "レーズンパンが名物",
-                    "get_date"       : null,
-                    "stamp_book_id"  : 1,
-                    "stamp_book_name": "中央自動車道",
-                }, {
-                    "id"             : 4,
-                    "name"           : "東京ラスク",
-                    "lat"            : 35.688507,
-                    "lng"            : 139.88102,
-                    "address"        : '東京都千代田区1-3-3',
-                    "image_url"      : "./images/no-image.jpg",
-                    "memo"           : "レーズンパンが名物",
-                    "get_date"       : "2017-09-10",
-                    "stamp_book_id"  : 2,
-                    "stamp_book_name": "これだけは行きたい！東京の旅",
-                }, {
-                    "id"             : 5,
-                    "name"           : "東京ばなな",
-                    "lat"            : 35.678597,
-                    "lng"            : 139.38142,
-                    "address"        : '東京千代田区1-3-3',
-                    "image_url"      : "./images/no-image.jpg",
-                    "memo"           : "レーズンパンが名物",
-                    "get_date"       : null,
-                    "stamp_book_id"  : 2,
-                    "stamp_book_name": "これだけは行きたい！東京の旅",
-                }, {
-                    "id"             : 6,
-                    "name"           : "東京いちご",
-                    "lat"            : 35.608597,
-                    "lng"            : 139.39142,
-                    "address"        : '東京千代田区1-3-4',
-                    "image_url"      : "./images/no-image.jpg",
-                    "memo"           : "イチゴが名物",
-                    "get_date"       : null,
-                    "stamp_book_id"  : 2,
-                    "stamp_book_name": "これだけは行きたい！東京の旅",
-                }],
+            // service.data = {
+            //     "Stamps": [{
+            //         "id"             : 0,
+            //         "name"           : "海老名SA",
+            //         "lat"            : 35.431248,
+            //         "lng"            : 139.401082,
+            //         "address"        : '神奈川県川崎市中原区宮内1-3-3',
+            //         "image_url"      : "./images/no-image.jpg",
+            //         "memo"           : "メロンパンが名物",
+            //         "get_date"       : null,
+            //         "stamp_book_id"  : 0,
+            //         "stamp_book_name": "東名高速道路",
+            //     }, {
+            //         "id"             : 1,
+            //         "name"           : "足柄SA",
+            //         "lat"            : 35.313659,
+            //         "lng"            : 138.966701,
+            //         "address"        : '神奈川県川崎市中原区宮内1-3-3',
+            //         "image_url"      : "./images/dummy-image.jpg",
+            //         "memo"           : "カレーパンが名物",
+            //         "get_date"       : "2017-6-20",
+            //         "stamp_book_id"  : 0,
+            //         "stamp_book_name": "東名高速道路",
+            //     }, {
+            //         "id"             : 2,
+            //         "name"           : "談合坂SA",
+            //         "lat"            : 35.628314,
+            //         "lng"            : 139.046914,
+            //         "address"        : '神奈川県川崎市中原区宮内1-3-3',
+            //         "image_url"      : "./images/no-image.jpg",
+            //         "memo"           : "こっぺパンが名物",
+            //         "get_date"       : null,
+            //         "stamp_book_id"  : 1,
+            //         "stamp_book_name": "中央自動車道",
+            //     }, {
+            //         "id"             : 3,
+            //         "name"           : "石川PA",
+            //         "lat"            : 35.677597,
+            //         "lng"            : 139.37142,
+            //         "address"        : '神奈川県川崎市中原区宮内1-3-3',
+            //         "image_url"      : "./images/no-image.jpg",
+            //         "memo"           : "レーズンパンが名物",
+            //         "get_date"       : null,
+            //         "stamp_book_id"  : 1,
+            //         "stamp_book_name": "中央自動車道",
+            //     }, {
+            //         "id"             : 4,
+            //         "name"           : "東京ラスク",
+            //         "lat"            : 35.688507,
+            //         "lng"            : 139.88102,
+            //         "address"        : '東京都千代田区1-3-3',
+            //         "image_url"      : "./images/no-image.jpg",
+            //         "memo"           : "レーズンパンが名物",
+            //         "get_date"       : "2017-09-10",
+            //         "stamp_book_id"  : 2,
+            //         "stamp_book_name": "これだけは行きたい！東京の旅",
+            //     }, {
+            //         "id"             : 5,
+            //         "name"           : "東京ばなな",
+            //         "lat"            : 35.678597,
+            //         "lng"            : 139.38142,
+            //         "address"        : '東京千代田区1-3-3',
+            //         "image_url"      : "./images/no-image.jpg",
+            //         "memo"           : "レーズンパンが名物",
+            //         "get_date"       : null,
+            //         "stamp_book_id"  : 2,
+            //         "stamp_book_name": "これだけは行きたい！東京の旅",
+            //     }, {
+            //         "id"             : 6,
+            //         "name"           : "東京いちご",
+            //         "lat"            : 35.608597,
+            //         "lng"            : 139.39142,
+            //         "address"        : '東京千代田区1-3-4',
+            //         "image_url"      : "./images/no-image.jpg",
+            //         "memo"           : "イチゴが名物",
+            //         "get_date"       : null,
+            //         "stamp_book_id"  : 2,
+            //         "stamp_book_name": "これだけは行きたい！東京の旅",
+            //     }],
 
-                "StampBooks": [{
-                    "id"            : 0,
-                    "name"          : "東名高速道路",
-                    "all_stamps_num": 2,
-                    "get_stamp_num" : 1,
-                    "image_url"     : "./images/dummy-image.jpg",
-                    "active_flg": true,
-                }, {
-                    "id"            : 1,
-                    "name"          : "中央自動車道",
-                    "all_stamps_num": 2,
-                    "get_stamp_num" : 0,
-                    "image_url"     : "./images/dummy-image.jpg",
-                    "active_flg": false,
-                }, {
-                    "id"            : 2,
-                    "name"          : "これだけは行きたい！東京の旅",
-                    "all_stamps_num": 3,
-                    "get_stamp_num" : 1,
-                    "image_url"     : "./images/dummy-image.jpg",
-                    "active_flg": true,
-                }]
-            };
-            localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));
-            localStorage.setItem("StampBooks", JSON.stringify(service.data.StampBooks));
+            //     "StampBooks": [{
+            //         "id"            : 0,
+            //         "name"          : "東名高速道路",
+            //         "all_stamps_num": 2,
+            //         "get_stamp_num" : 1,
+            //         "image_url"     : "./images/dummy-image.jpg",
+            //         "active_flg": true,
+            //     }, {
+            //         "id"            : 1,
+            //         "name"          : "中央自動車道",
+            //         "all_stamps_num": 2,
+            //         "get_stamp_num" : 0,
+            //         "image_url"     : "./images/dummy-image.jpg",
+            //         "active_flg": false,
+            //     }, {
+            //         "id"            : 2,
+            //         "name"          : "これだけは行きたい！東京の旅",
+            //         "all_stamps_num": 3,
+            //         "get_stamp_num" : 1,
+            //         "image_url"     : "./images/dummy-image.jpg",
+            //         "active_flg": true,
+            //     }]
+            // };
+            // localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));
+            // localStorage.setItem("StampBooks", JSON.stringify(service.data.StampBooks));
+            // showProcessingModal.hide();
             // set data
-            // $http.get("data.json").then(function(response) {
-            //     alert('read data');
-            //     service.data = response.data;
-            //     localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));
-            //     localStorage.setItem("StampBooks", JSON.stringify(service.data.StampBooks));
-            // });
+            $http.get("data.json").then(function(response) {
+                console.log("read data");
+                service.data = response.data;
+                localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));
+                localStorage.setItem("StampBooks", JSON.stringify(service.data.StampBooks));
+                showProcessingModal.hide();
+            });
             // test to set data
             // var stamps = localStorage.getItem("stamps");
             // alert(JSON.parse(stamps)[0].name);
@@ -324,12 +326,14 @@
 
             $scope.select = function(stamp_book, e) {
                 console.log("select join or not join");
-                if(e.target.innerHTML == NOT_JOINED) {
+                if(e.target.innerText == NOT_JOINED) {
                     join(stamp_book, e);
-                } else if(e.target.innerHTML == JOINED) {
+                } else if(e.target.innerText == JOINED) {
                     not_join(stamp_book, e);
+                } else {
+                    console.log(e.target.innerText);
                 }
-            }
+            };
 
             function join(stamp_book, e) {
                 ons.notification.confirm({
