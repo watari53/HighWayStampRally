@@ -114,7 +114,7 @@ ons.bootstrap()
         // localStorage.setItem("StampBooks", JSON.stringify(service.data.StampBooks));
         // showProcessingModal.hide();
         // set data
-        $http.get("data.json").then(function(response) {
+        $http.get("data/data.json").then(function(response) {
             console.log("read data");
             service.data = response.data;
             localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));

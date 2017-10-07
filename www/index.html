@@ -27,34 +27,38 @@
 
     <body>
 
-        <ons-navigator id="nav" var="nav" page="splitter.html">
-            <ons-template id="splitter.html">
-                <ons-page>
-                    <ons-splitter ng-controller="AppController as app" var="splitter">
-                        <ons-splitter-side side="left" width="220px" collapse swipeable>
-                            <ons-page>
-                                <ons-list>
-                                    <ons-list-header>Menu</ons-list-header>
-                                    <ons-list-item ng-click="app.load('home.html')" tappable>
-
-                                      <div class="left">
-                                        <ons-icon icon="md-home" class="list-item__icon"></ons-icon>
-                                      </div>
-                                      <div class="center">
-                                        ホーム
-                                      </div>
-                                    </ons-list-item>
-                                    <ons-list-item ng-click="app.load('about.html')" tappable>
-                                        About
-                                    </ons-list-item>
-                                </ons-list>
-                            </ons-page>
-                        </ons-splitter-side>
-                        <ons-splitter-content page="home.html"></ons-splitter-content>
-                    </ons-splitter>
-                </ons-page>
-            </ons-template>
-        </ons-navigator>
+        <ons-navigator id="nav" var="nav" page="splitter.html"></ons-navigator>
+        
+        <ons-template id="splitter.html">
+            <ons-page>
+                <ons-splitter ng-controller="AppController as app" var="splitter">
+                    <ons-splitter-side side="left" width="220px" collapse swipeable>
+                        <ons-page>
+                            <ons-list>
+                                <ons-list-header>Menu</ons-list-header>
+                                <ons-list-item ng-click="app.load('home.html')" tappable>
+                                  <div class="left">
+                                    <ons-icon icon="md-home" class="list-item__icon"></ons-icon>
+                                  </div>
+                                  <div class="center">
+                                    ホーム
+                                  </div>
+                                </ons-list-item>
+                                <ons-list-item ng-click="app.load('about.html')" tappable>
+                                  <div class="left">
+                                    <ons-icon icon="fa-question" class="list-item__icon"></ons-icon>
+                                  </div>
+                                  <div class="center">
+                                    About
+                                  </div>
+                                </ons-list-item>
+                            </ons-list>
+                        </ons-page>
+                    </ons-splitter-side>
+                    <ons-splitter-content page="home.html"></ons-splitter-content>
+                </ons-splitter>
+            </ons-page>
+        </ons-template>
 
         <ons-template id="home.html">
             <ons-page ng-controller="HomeController">
