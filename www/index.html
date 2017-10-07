@@ -27,34 +27,33 @@
 
     <body>
 
-        <ons-navigator id="nav" var="nav" page="home.html">
-            <ons-page>
-                <ons-splitter ng-controller="AppController as app" var="splitter">
-                    <ons-splitter-side side="left" width="220px" collapse swipeable>
-                        <ons-page>
-                            <ons-list>
-                                <ons-list-header>Menu</ons-list-header>
-                                <ons-list-item ng-click="app.load('home.html')" tappable>
+        <ons-navigator id="nav" var="nav" page="splitter.html">
+            <ons-template id="splitter.html">
+                <ons-page>
+                    <ons-splitter ng-controller="AppController as app" var="splitter">
+                        <ons-splitter-side side="left" width="220px" collapse swipeable>
+                            <ons-page>
+                                <ons-list>
+                                    <ons-list-header>Menu</ons-list-header>
+                                    <ons-list-item ng-click="app.load('home.html')" tappable>
 
-                                  <div class="left">
-                                    <ons-icon icon="md-home" class="list-item__icon"></ons-icon>
-                                  </div>
-                                  <div class="center">
-                                    ホーム
-                                  </div>
-                                </ons-list-item>
-                                <ons-list-item ng-click="app.load('collection.html')" tappable>
-                                    スタンプラリー
-                                </ons-list-item>
-                                <ons-list-item ng-click="app.load('map.html')" tappable>
-                                    スタンプ施設マップ
-                                </ons-list-item>
-                            </ons-list>
-                        </ons-page>
-                    </ons-splitter-side>
-                    <ons-splitter-content page="home.html"></ons-splitter-content>
-                </ons-splitter>
-            </ons-page>
+                                      <div class="left">
+                                        <ons-icon icon="md-home" class="list-item__icon"></ons-icon>
+                                      </div>
+                                      <div class="center">
+                                        ホーム
+                                      </div>
+                                    </ons-list-item>
+                                    <ons-list-item ng-click="app.load('about.html')" tappable>
+                                        About
+                                    </ons-list-item>
+                                </ons-list>
+                            </ons-page>
+                        </ons-splitter-side>
+                        <ons-splitter-content page="home.html"></ons-splitter-content>
+                    </ons-splitter>
+                </ons-page>
+            </ons-template>
         </ons-navigator>
 
         <ons-template id="home.html">
@@ -342,7 +341,7 @@
                 </ons-list>
 
                 <div style="margin-top: 20px; padding: 20px;">
-                    <ons-button modifier='large' ng-click="go_home()">
+                    <ons-button modifier='large' ng-click="go_top()">
                         トップページへ戻る
                     </ons-button>
                 </div>
@@ -365,6 +364,22 @@
 
             </ons-page>
         </ons-template>
+
+        <ons-template id="about.html">
+          <ons-page>
+            <ons-toolbar>
+              <div class="left">
+                <ons-toolbar-button ng-click="app.toggle()">
+                  <ons-icon icon="md-menu"></ons-icon>
+                </ons-toolbar-button>
+              </div>
+              <div class="center">
+                About
+              </div>
+            </ons-toolbar>
+          </ons-page>
+        </ons-template>
+
     </body>
 
     </html>
