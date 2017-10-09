@@ -1,0 +1,18 @@
+{
+    "update": {
+        "Stamps": [
+            {
+                    "id"             : 0,
+                    "name"           : "海老名SA",
+                    "lat"            : 35.431248,
+                    "lng"            : 139.401082,
+                    "address"        : "神奈川県川崎市中原区宮内1-3-3",
+                    "image_url"      : "./images/no-image.jpg",
+                    "memo"           : "updated",
+                    "get_date"       : "",
+                    "stamp_book_id"  : 0,
+                    "stamp_book_name": "東名高速道路"
+            }
+        ]
+    }
+}
