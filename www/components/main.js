@@ -337,6 +337,7 @@ ons.bootstrap()
 
         function join(stamp_book, e) {
             ons.notification.confirm({
+                title: "スタンプラリーに参加",
                 message: stamp_book.name + '<br>' + 'このスタンプに参加しますか?',
                 callback: function(answer) {
                     if (answer == 1) { // yes
@@ -360,6 +361,8 @@ ons.bootstrap()
 
         function not_join(stamp_book, e) {
             ons.notification.confirm({
+                title: "スタンプラリーの取り消し",
+
                 message: stamp_book.name + '<br>' + 'このスタンプを取り消しますか?',
                 callback: function(answer) {
                     if (answer == 1) { // yes
