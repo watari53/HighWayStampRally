@@ -1,5 +1,4 @@
 {
-    "update": {
         "Stamps": [
             {
                     "id"             : 0,
@@ -13,6 +12,15 @@
                     "stamp_book_id"  : 0,
                     "stamp_book_name": "東名高速道路"
             }
-        ]
-    }
+        ],
+
+        "StampBooks": [
+            {
+                    "id"            : 0,
+                    "name"          : "東名高速道路",
+                    "all_stamps_num": 2,
+                    "get_stamp_num" : 1,
+                    "image_url"     : "./images/dummy-image.jpg",
+                    "active_flg": true
+            }]
 }
