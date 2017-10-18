@@ -131,6 +131,18 @@ ons.bootstrap()
             });
         }
         console.log("data update");
+        // update
+        $http.get("data/update_data.json").then(function(response) {
+            var update_data = JSON.stringify(response.data);
+            // update stamps
+            for (var i=0; i < update_data.Stamps.length) {
+                console.log("update stamp:" + update_data.Stamps[i].name);
+            }
+            // update stamp books
+            for (var i=0; i < update_data.StampBooks.length) {
+                console.log("update stamp book:" + update_data.StampBooks[i].name);
+            }
+        });
         showProcessingModal.hide();
         // test to set data
         // var stamps = localStorage.getItem("stamps");
