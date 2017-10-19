@@ -2,7 +2,7 @@
         "Stamps": [
             {
                     "id"             : 0,
-                    "name"           : "海老名SA",
+                    "name"           : "ebina SA",
                     "lat"            : 35.431248,
                     "lng"            : 139.401082,
                     "address"        : "神奈川県川崎市中原区宮内1-3-3",
@@ -17,10 +17,7 @@
         "StampBooks": [
             {
                     "id"            : 0,
-                    "name"          : "東名高速道路",
-                    "all_stamps_num": 2,
-                    "get_stamp_num" : 1,
+                    "name"          : "to-mei high way",
                     "image_url"     : "./images/dummy-image.jpg",
-                    "active_flg": true
             }]
 }

@@ -8,7 +8,7 @@ ons.bootstrap()
         showProcessingModal.show();
         var service = {};
         function set_sample_data () {
-            service.data = {
+            var data = {
                 "Stamps": [{
                     "id"             : 0,
                     "name"           : "海老名SA",
@@ -111,8 +111,8 @@ ons.bootstrap()
                     "active_flg": true,
                 }]
             };
-            localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));
-            localStorage.setItem("StampBooks", JSON.stringify(service.data.StampBooks));
+            localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
+            localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
             showProcessingModal.hide();
         }
         // set sample data
@@ -123,27 +123,43 @@ ons.bootstrap()
         if (deployFlag == null) {
             console.log("first deploy");
             $http.get("data/data.json").then(function(response) {
-                service.data = response.data;
-                localStorage.setItem("Stamps", JSON.stringify(service.data.Stamps));
-                localStorage.setItem("StampBooks", JSON.stringify(service.data.StampBooks));
+                var data = response.data;
+                localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
+                localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
                 localStorage.setItem("deployFlag", true);
                 showProcessingModal.hide();
             });
         }
         console.log("data update");
-        // update
-        $http.get("data/update_data.json").then(function(response) {
-            var update_data = JSON.stringify(response.data);
+        $http.get("data/data-update.json").then(function(response) {
+            console.log("data update");
+            var update_stamps = response.data.Stamps; //update用データ
+            var update_stamp_books = response.data.StampBooks; //update用データ
             // update stamps
-            for (var i=0; i < update_data.Stamps.length) {
-                console.log("update stamp:" + update_data.Stamps[i].name);
+            for (var i = 0; i < update_stamps.length; i++) {
+                var update_target_stamp = service.getStampById(update_stamps[i].id)  //updateされるデータ
+                console.log("1:" + update_stamps[i].name);
+                console.log("2:" + update_target_stamp.name);
+                for(key in update_stamps[i]) { //updateするstampのhash key
+                    // alert(update_target_stamp[key] + "<-" + update_stamps[i][key]);
+                    update_target_stamp[key] = update_stamps[i][key];
+                }
+                // set stamp data
+                var update_target_stamp = service.updateStampData(update_target_stamp);
             }
             // update stamp books
-            for (var i=0; i < update_data.StampBooks.length) {
-                console.log("update stamp book:" + update_data.StampBooks[i].name);
+            for (var i = 0; i < update_stamp_books.length; i++) {
+                var update_target_stamp_book = service.getStampBookById(update_stamp_books[i].id);
+                console.log("1:" + update_stamp_books[i].name);
+                console.log("2:" + update_target_stamp_book.name);
+                for(key in update_stamp_books[i]) {
+                    update_target_stamp_book[key] = update_stamp_books[i][key];
+                }
+                // set stamp data
+                var update_target_stamp_book = service.updateStampBookData(update_target_stamp_book);
             }
+            showProcessingModal.hide();
         });
-        showProcessingModal.hide();
         // test to set data
         // var stamps = localStorage.getItem("stamps");
         // alert(JSON.parse(stamps)[0].name);
@@ -163,8 +179,8 @@ ons.bootstrap()
         service.updateStampData = function(stamp) {
             console.log("updateStampData");
 
-            // service.data.Stamps[stamp.id] = stamp;
             var stamps = service.getStampData();
+            // stamp.id == array id
             stamps[stamp.id] = stamp;
             service.setStampData(stamps);
             return stamps[stamp.id];
