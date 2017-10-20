@@ -116,20 +116,20 @@ ons.bootstrap()
             showProcessingModal.hide();
         }
         // set sample data
-        // set_sample_data();
+        set_sample_data();
         // set data from data.json
-        var deployFlag = localStorage.getItem("deployFlag")
-        console.log(deployFlag);
-        if (deployFlag == null) {
-            console.log("first deploy");
-            $http.get("data/data.json").then(function(response) {
-                var data = response.data;
-                localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
-                localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
-                localStorage.setItem("deployFlag", true);
-                showProcessingModal.hide();
-            });
-        }
+        // var deployFlag = localStorage.getItem("deployFlag")
+        // console.log(deployFlag);
+        // if (deployFlag == null) {
+        //     console.log("first deploy");
+        //     $http.get("data/data.json").then(function(response) {
+        //         var data = response.data;
+        //         localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
+        //         localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
+        //         localStorage.setItem("deployFlag", true);
+        //         showProcessingModal.hide();
+        //     });
+        // }
         console.log("data update");
         $http.get("data/data-update.json").then(function(response) {
             console.log("data update");
@@ -138,28 +138,34 @@ ons.bootstrap()
             // update stamps
             for (var i = 0; i < update_stamps.length; i++) {
                 var update_target_stamp = service.getStampById(update_stamps[i].id)  //updateされるデータ
-                console.log("1:" + update_stamps[i].name);
-                console.log("2:" + update_target_stamp.name);
-                for(key in update_stamps[i]) { //updateするstampのhash key
-                    // alert(update_target_stamp[key] + "<-" + update_stamps[i][key]);
-                    update_target_stamp[key] = update_stamps[i][key];
+                // if target stamp exist, update stamp data
+                if (update_target_stamp) {
+                    for(key in update_stamps[i]) { //updateするstampのhash key
+                        update_target_stamp[key] = update_stamps[i][key];
+                    }
+                    // set stamp data
+                    update_target_stamp = service.updateStampData(update_target_stamp);
+                } else {
+                    service.addStampData(update_stamps[i]);
                 }
-                // set stamp data
-                var update_target_stamp = service.updateStampData(update_target_stamp);
             }
             // update stamp books
             for (var i = 0; i < update_stamp_books.length; i++) {
                 var update_target_stamp_book = service.getStampBookById(update_stamp_books[i].id);
-                console.log("1:" + update_stamp_books[i].name);
-                console.log("2:" + update_target_stamp_book.name);
-                for(key in update_stamp_books[i]) {
-                    update_target_stamp_book[key] = update_stamp_books[i][key];
+                // if target sample_data exist, update stamp_book data
+                if (update_target_stamp_book) {
+                    for(key in update_stamp_books[i]) {
+                        update_target_stamp_book[key] = update_stamp_books[i][key];
+                    }
+                    // set stamp data
+                    update_target_stamp_book = service.updateStampBookData(update_target_stamp_book);
+                } else {
+                    service.addStampBookData(update_stamp_books[i]);
                 }
-                // set stamp data
-                var update_target_stamp_book = service.updateStampBookData(update_target_stamp_book);
             }
             showProcessingModal.hide();
         });
+        // showProcessingModal.hide();
         // test to set data
         // var stamps = localStorage.getItem("stamps");
         // alert(JSON.parse(stamps)[0].name);
@@ -183,7 +189,12 @@ ons.bootstrap()
             // stamp.id == array id
             stamps[stamp.id] = stamp;
             service.setStampData(stamps);
-            return stamps[stamp.id];
+        };
+
+        service.addStampData = function(stamp) {
+            var stamps = service.getStampData();
+            stamps.push(stamp);
+            service.setStampData(stamps);
         };
 
         service.getActiveStampData = function() {
@@ -212,6 +223,13 @@ ons.bootstrap()
             service.setStampBooksData(stamp_books);
         };
 
+        service.addStampBookData = function(stamp_book) {
+            var stamp_books = service.getStampBooks();
+            stamp_books.push(stamp_book);
+            service.setStampBooksData(stamp_books);
+        }
+        // return stamp object or false
+        // if stamp dont exist, return false
         service.getStampById = function(stamp_id) {
             var stamp = null;
             var stamp_id = stamp_id;
@@ -219,12 +237,14 @@ ons.bootstrap()
             for (key in stamps) {
                 if (stamps[key].id == stamp_id) {
                     stamp = stamps[key];
-                    break;
+                    return stamp;
                 }
             }
-            return stamp;
+            return false;
         };
 
+        // return stamp_book object or false
+        // if stamp_book dont exist, return false
         service.getStampBookById = function(stamp_book_id) {
             var stamp_book = null;
             var stamp_book_id = stamp_book_id;
@@ -232,10 +252,10 @@ ons.bootstrap()
             for (key in stamp_books) {
                 if (stamp_books[key].id == stamp_book_id) {
                     stamp_book = stamp_books[key];
-                    break;
+                    return stamp_book;
                 }
             }
-            return stamp_book;
+            return false;
         };
 
         service.getStampBooks = function() {

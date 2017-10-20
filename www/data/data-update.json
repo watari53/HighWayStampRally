@@ -11,6 +11,30 @@
                     "get_date"       : "",
                     "stamp_book_id"  : 0,
                     "stamp_book_name": "東名高速道路"
+            },
+            {
+                    "id"             : 7,
+                    "name"           : "ebina SA2",
+                    "lat"            : 35.431240,
+                    "lng"            : 139.401042,
+                    "address"        : "神奈川県川崎市中原区宮内1-3-3",
+                    "image_url"      : "./images/no-image.jpg",
+                    "memo"           : "add",
+                    "get_date"       : "",
+                    "stamp_book_id"  : 4,
+                    "stamp_book_name": "新しいスタンプブック"
+            },
+            {
+                    "id"             : 8,
+                    "name"           : "ebina SA3",
+                    "lat"            : 35.431040,
+                    "lng"            : 139.402042,
+                    "address"        : "神奈川県川崎市中原区宮内1-3-4",
+                    "image_url"      : "./images/no-image.jpg",
+                    "memo"           : "add",
+                    "get_date"       : "",
+                    "stamp_book_id"  : 4,
+                    "stamp_book_name": "新しいスタンプブック"
             }
         ],
 
@@ -18,6 +42,13 @@
             {
                     "id"            : 0,
                     "name"          : "to-mei high way",
+                    "image_url"     : "./images/dummy-image.jpg"
+            },{
+                    "id"            : 4,
+                    "name"          : "新しいスタンプブック",
+                    "all_stamps_num": 1,
+                    "get_stamp_num" : 0,
                     "image_url"     : "./images/dummy-image.jpg",
+                    "active_flg"    : false
             }]
 }
