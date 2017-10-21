@@ -42,9 +42,9 @@
             {
                     "id"            : 0,
                     "name"          : "to-mei high way",
-                    "all_stamps_num": 1,
+                    "all_stamps_num": 1
             },{
-                    "id"            : 4,
+                    "id"            : 3,
                     "name"          : "新しいスタンプブック",
                     "all_stamps_num": 1,
                     "get_stamp_num" : 0,

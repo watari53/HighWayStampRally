@@ -1,6 +1,8 @@
 // This is a JavaScript file
 
 var DUMMY_IMAGE = "./images/no-image.jpg";
+var DATA_FILE = "./data/data.json";
+var UPDATE_DATA_FILE = "./data/data-update.json";
 var app = {};
 
 ons.bootstrap()
@@ -115,59 +117,65 @@ ons.bootstrap()
             localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
             showProcessingModal.hide();
         }
-        // set sample data
-        set_sample_data();
-        // set data from data.json
-        // var deployFlag = localStorage.getItem("deployFlag")
-        // console.log(deployFlag);
-        // if (deployFlag == null) {
-        //     console.log("first deploy");
-        //     $http.get("data/data.json").then(function(response) {
-        //         var data = response.data;
-        //         localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
-        //         localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
-        //         localStorage.setItem("deployFlag", true);
-        //         showProcessingModal.hide();
-        //     });
-        // }
-        console.log("data update");
-        $http.get("data/data-update.json").then(function(response) {
+
+        function update_data() {
             console.log("data update");
-            var UPDATE_DATA_KEY = ["name", "lat", "lng", "address", "stamp_book_id", "stamp_book_name"];
-            var update_stamps = response.data.Stamps; //update用データ
-            var update_stamp_books = response.data.StampBooks; //update用データ
-            // update stamps
-            for (var i = 0; i < update_stamps.length; i++) {
-                var update_target_stamp = service.getStampById(update_stamps[i].id);  //updateされるデータ
-                // if target stamp exist, update stamp data
-                if (update_target_stamp) {
-                    for(key of UPDATE_DATA_KEY) { //updateするstampのhash key
-                        // block user data
-                        update_target_stamp[key] = update_stamps[i][key];
+            $http.get(UPDATE_DATA_FILE).then(function(response) {
+                console.log("data update");
+                var UPDATE_DATA_KEY = ["name", "lat", "lng", "address", "stamp_book_id", "stamp_book_name"];
+                var update_stamps = response.data.Stamps; //update用データ
+                var update_stamp_books = response.data.StampBooks; //update用データ
+                // update stamps
+                for (var i = 0; i < update_stamps.length; i++) {
+                    var update_target_stamp = service.getStampById(update_stamps[i].id);  //updateされるデータ
+                    // if target stamp exist, update stamp data
+                    if (update_target_stamp) {
+                        for(key of UPDATE_DATA_KEY) { //updateするstampのhash key
+                            // block user data
+                            update_target_stamp[key] = update_stamps[i][key];
+                        }
+                        // set stamp data
+                        update_target_stamp = service.updateStampData(update_target_stamp);
+                    } else {
+                        service.addStampData(update_stamps[i]);
                     }
-                    // set stamp data
-                    update_target_stamp = service.updateStampData(update_target_stamp);
-                } else {
-                    service.addStampData(update_stamps[i]);
                 }
-            }
-            // update stamp books
-            for (var i = 0; i < update_stamp_books.length; i++) {
-                var UPDATE_DATA_KEY = ["name", "all_stamps_num"];
-                var update_target_stamp_book = service.getStampBookById(update_stamp_books[i].id);
-                // if target sample_data exist, update stamp_book data
-                if (update_target_stamp_book) {
-                    for(key of UPDATE_DATA_KEY) {
-                        update_target_stamp_book[key] = update_stamp_books[i][key];
+                // update stamp books
+                for (var i = 0; i < update_stamp_books.length; i++) {
+                    var UPDATE_DATA_KEY = ["name", "all_stamps_num"];
+                    var update_target_stamp_book = service.getStampBookById(update_stamp_books[i].id);
+                    // if target sample_data exist, update stamp_book data
+                    if (update_target_stamp_book) {
+                        for(key of UPDATE_DATA_KEY) {
+                            update_target_stamp_book[key] = update_stamp_books[i][key];
+                        }
+                        // set stamp data
+                        update_target_stamp_book = service.updateStampBookData(update_target_stamp_book);
+                    } else {
+                        service.addStampBookData(update_stamp_books[i]);
                     }
-                    // set stamp data
-                    update_target_stamp_book = service.updateStampBookData(update_target_stamp_book);
-                } else {
-                    service.addStampBookData(update_stamp_books[i]);
                 }
-            }
-            showProcessingModal.hide();
-        });
+                showProcessingModal.hide();
+            });
+
+        }
+        // set sample data
+        // set_sample_data();
+        // set data from data.json
+        var deployFlag = localStorage.getItem("deployFlag")
+        console.log(deployFlag);
+        if (deployFlag == null) {
+            console.log("first deploy");
+            $http.get(DATA_FILE).then(function(response) {
+                var data = response.data;
+                localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
+                localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
+                localStorage.setItem("deployFlag", true);
+                update_data();
+            });
+        } else {
+            update_data();
+        }
         // showProcessingModal.hide();
         // test to set data
         // var stamps = localStorage.getItem("stamps");
