@@ -42,7 +42,7 @@
             {
                     "id"            : 0,
                     "name"          : "to-mei high way",
-                    "image_url"     : "./images/dummy-image.jpg"
+                    "all_stamps_num": 1,
             },{
                     "id"            : 4,
                     "name"          : "新しいスタンプブック",

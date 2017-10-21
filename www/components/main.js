@@ -133,14 +133,16 @@ ons.bootstrap()
         console.log("data update");
         $http.get("data/data-update.json").then(function(response) {
             console.log("data update");
+            var UPDATE_DATA_KEY = ["name", "lat", "lng", "address", "stamp_book_id", "stamp_book_name"];
             var update_stamps = response.data.Stamps; //update用データ
             var update_stamp_books = response.data.StampBooks; //update用データ
             // update stamps
             for (var i = 0; i < update_stamps.length; i++) {
-                var update_target_stamp = service.getStampById(update_stamps[i].id)  //updateされるデータ
+                var update_target_stamp = service.getStampById(update_stamps[i].id);  //updateされるデータ
                 // if target stamp exist, update stamp data
                 if (update_target_stamp) {
-                    for(key in update_stamps[i]) { //updateするstampのhash key
+                    for(key of UPDATE_DATA_KEY) { //updateするstampのhash key
+                        // block user data
                         update_target_stamp[key] = update_stamps[i][key];
                     }
                     // set stamp data
@@ -151,10 +153,11 @@ ons.bootstrap()
             }
             // update stamp books
             for (var i = 0; i < update_stamp_books.length; i++) {
+                var UPDATE_DATA_KEY = ["name", "all_stamps_num"];
                 var update_target_stamp_book = service.getStampBookById(update_stamp_books[i].id);
                 // if target sample_data exist, update stamp_book data
                 if (update_target_stamp_book) {
-                    for(key in update_stamp_books[i]) {
+                    for(key of UPDATE_DATA_KEY) {
                         update_target_stamp_book[key] = update_stamp_books[i][key];
                     }
                     // set stamp data
