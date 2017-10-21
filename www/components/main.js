@@ -115,6 +115,7 @@ ons.bootstrap()
             };
             localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
             localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
+            update_data();
             showProcessingModal.hide();
         }
 
@@ -160,23 +161,22 @@ ons.bootstrap()
 
         }
         // set sample data
-        // set_sample_data();
+        set_sample_data();
         // set data from data.json
-        var deployFlag = localStorage.getItem("deployFlag")
-        console.log(deployFlag);
-        if (deployFlag == null) {
-            console.log("first deploy");
-            $http.get(DATA_FILE).then(function(response) {
-                var data = response.data;
-                localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
-                localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
-                localStorage.setItem("deployFlag", true);
-                update_data();
-            });
-        } else {
-            update_data();
-        }
-        // showProcessingModal.hide();
+        // var deployFlag = localStorage.getItem("deployFlag")
+        // console.log(deployFlag);
+        // if (deployFlag == null) {
+        //     console.log("first deploy");
+        //     $http.get(DATA_FILE).then(function(response) {
+        //         var data = response.data;
+        //         localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
+        //         localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
+        //         localStorage.setItem("deployFlag", true);
+        //         update_data();
+        //     });
+        // } else {
+        //     update_data();
+        // }
         // test to set data
         // var stamps = localStorage.getItem("stamps");
         // alert(JSON.parse(stamps)[0].name);

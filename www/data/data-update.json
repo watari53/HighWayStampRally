@@ -10,7 +10,19 @@
                     "memo"           : "updated",
                     "get_date"       : "",
                     "stamp_book_id"  : 0,
-                    "stamp_book_name": "東名高速道路"
+                    "stamp_book_name": "to-mei high way"
+            },
+            {
+                    "id"             : 1,
+                    "name"           : "足柄SA update",
+                    "lat"            : 35.313659,
+                    "lng"            : 138.966701,
+                    "address"        : "神奈川県川崎市中原区宮内1-3-3",
+                    "image_url"      : "./images/dummy-image.jpg",
+                    "memo"           : "カレーパンが名物",
+                    "get_date"       : "2017-6-20",
+                    "stamp_book_id"  : 0,
+                    "stamp_book_name": "to-mei high way"
             },
             {
                     "id"             : 7,
@@ -42,9 +54,9 @@
             {
                     "id"            : 0,
                     "name"          : "to-mei high way",
-                    "all_stamps_num": 1
+                    "image_url"     : "./images/dummy-image.jpg"
             },{
-                    "id"            : 3,
+                    "id"            : 4,
                     "name"          : "新しいスタンプブック",
                     "all_stamps_num": 1,
                     "get_stamp_num" : 0,
