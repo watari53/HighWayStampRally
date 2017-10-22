@@ -269,6 +269,19 @@ ons.bootstrap()
             return false;
         };
 
+        service.getStampBooksByTag = function(tag) {
+            var tag = tag;
+            var stamp_books = service.getStampBooks();
+            var ret = [];
+            for(var i = 0; i < stamp_books.length; i++) {
+                if (stamp_books[i].name.indexOf(tag) != -1) {
+                    // push stamp book object
+                    ret.push(stamp_books[i]);
+                }
+            }
+            return ret;
+        };
+
         service.getStampBooks = function() {
             return JSON.parse(localStorage.getItem("StampBooks"));
         };
@@ -361,7 +374,7 @@ ons.bootstrap()
     .controller('StampBooksController', function($scope, DataService) {
         var JOINABLE_STAMPRALLY = 0;
         var JOINED_STAMPRALLY = 1;
-        $scope.stamps = DataService.getStampData(); //SA.PAデータ
+        // $scope.stamps = DataService.getStampData(); //SA.PAデータ
         $scope.stamp_books = DataService.getStampBooks(); //高速道路データ
 
         $( 'input[name="segment"]:radio' ).change( function() {  
@@ -374,6 +387,12 @@ ons.bootstrap()
                 $('#activated').css('display', 'none');
                 $('#inactivated').css('display', 'block');
             }
+        });
+
+        $('#search-stamp-book').on('input', function() {
+            var searchText = $(this).val(); // 検索ボックスに入力された値
+            $scope.stamp_books = DataService.getStampBooksByTag(searchText);
+            $scope.$apply(); //画像を反映
         });
 
         $scope.go_stamps = function(stamp_book) {
