@@ -32,6 +32,7 @@
                     "address"        : "神奈川県川崎市中原区宮内1-3-3",
                     "image_url"      : "./images/no-image.jpg",
                     "memo"           : "add",
+                    "tags"           : ["神奈川県", "SA"],
                     "get_date"       : "",
                     "stamp_book_id"  : 4,
                     "stamp_book_name": "新しいスタンプブック"
@@ -44,6 +45,7 @@
                     "address"        : "神奈川県川崎市中原区宮内1-3-4",
                     "image_url"      : "./images/no-image.jpg",
                     "memo"           : "add",
+                    "tags"           : ["神奈川県", "SA"],
                     "get_date"       : "",
                     "stamp_book_id"  : 4,
                     "stamp_book_name": "新しいスタンプブック"
@@ -61,6 +63,7 @@
                     "all_stamps_num": 1,
                     "get_stamp_num" : 0,
                     "image_url"     : "./images/dummy-image.jpg",
+                    "tags"           : ["神奈川県", "SA"],
                     "active_flg"    : false
             }]
 }

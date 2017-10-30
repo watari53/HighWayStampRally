@@ -19,6 +19,7 @@ ons.bootstrap()
                     "address"        : '神奈川県川崎市中原区宮内1-3-3',
                     "image_url"      : "./images/no-image.jpg",
                     "memo"           : "メロンパンが名物",
+                    "tags"           : ["歴史","文化", "海老名SA"],
                     "get_date"       : null,
                     "stamp_book_id"  : 0,
                     "stamp_book_name": "東名高速道路",
@@ -30,6 +31,7 @@ ons.bootstrap()
                     "address"        : '神奈川県川崎市中原区宮内1-3-3',
                     "image_url"      : "./images/dummy-image.jpg",
                     "memo"           : "カレーパンが名物",
+                    "tags"           : ["スポーツ","グルメ", "足柄SA"],
                     "get_date"       : "2017-6-20",
                     "stamp_book_id"  : 0,
                     "stamp_book_name": "東名高速道路",
@@ -41,6 +43,7 @@ ons.bootstrap()
                     "address"        : '神奈川県川崎市中原区宮内1-3-3',
                     "image_url"      : "./images/no-image.jpg",
                     "memo"           : "こっぺパンが名物",
+                    "tags"           : ["スポーツ","グルメ", "談合坂SA"],
                     "get_date"       : null,
                     "stamp_book_id"  : 1,
                     "stamp_book_name": "中央自動車道",
@@ -52,6 +55,7 @@ ons.bootstrap()
                     "address"        : '神奈川県川崎市中原区宮内1-3-3',
                     "image_url"      : "./images/no-image.jpg",
                     "memo"           : "レーズンパンが名物",
+                    "tags"           : ["スポーツ","PA", "石川PA"],
                     "get_date"       : null,
                     "stamp_book_id"  : 1,
                     "stamp_book_name": "中央自動車道",
@@ -63,6 +67,8 @@ ons.bootstrap()
                     "address"        : '東京都千代田区1-3-3',
                     "image_url"      : "./images/no-image.jpg",
                     "memo"           : "レーズンパンが名物",
+                    "tags"           : ["おやつ", "東京ラスク"],
+                    "get_date"       : null,
                     "get_date"       : "2017-09-10",
                     "stamp_book_id"  : 2,
                     "stamp_book_name": "これだけは行きたい！東京の旅",
@@ -74,6 +80,7 @@ ons.bootstrap()
                     "address"        : '東京千代田区1-3-3',
                     "image_url"      : "./images/no-image.jpg",
                     "memo"           : "レーズンパンが名物",
+                    "tags"           : ["おやつ", "東京ばなな"],
                     "get_date"       : null,
                     "stamp_book_id"  : 2,
                     "stamp_book_name": "これだけは行きたい！東京の旅",
@@ -85,6 +92,7 @@ ons.bootstrap()
                     "address"        : '東京千代田区1-3-4',
                     "image_url"      : "./images/no-image.jpg",
                     "memo"           : "イチゴが名物",
+                    "tags"           : ["おやつ", "東京いちご"],
                     "get_date"       : null,
                     "stamp_book_id"  : 2,
                     "stamp_book_name": "これだけは行きたい！東京の旅",
@@ -96,6 +104,7 @@ ons.bootstrap()
                     "all_stamps_num": 2,
                     "get_stamp_num" : 1,
                     "image_url"     : "./images/dummy-image.jpg",
+                    "tags"          : ["歴史","文化", "海老名SA", "スポーツ","グルメ", "足柄SA"],
                     "active_flg": true,
                 }, {
                     "id"            : 1,
@@ -103,6 +112,7 @@ ons.bootstrap()
                     "all_stamps_num": 2,
                     "get_stamp_num" : 0,
                     "image_url"     : "./images/dummy-image.jpg",
+                    "tags"          : ["スポーツ","グルメ", "談合坂SA", "PA", "石川PA"],
                     "active_flg": false,
                 }, {
                     "id"            : 2,
@@ -110,6 +120,7 @@ ons.bootstrap()
                     "all_stamps_num": 3,
                     "get_stamp_num" : 1,
                     "image_url"     : "./images/dummy-image.jpg",
+                    "tags"          : ["おやつ", "東京ラスク", "東京ばなな","東京イチゴ"],
                     "active_flg": true,
                 }]
             };
@@ -270,11 +281,12 @@ ons.bootstrap()
         };
 
         service.getStampBooksByTag = function(tag) {
-            var tag = tag;
+            var search_tag = tag;
             var stamp_books = service.getStampBooks();
             var ret = [];
             for(var i = 0; i < stamp_books.length; i++) {
-                if (stamp_books[i].name.indexOf(tag) != -1) {
+                // <TODO> 部分一致にしたい
+                if (stamp_books[i].tags.indexOf(search_tag) != -1) {
                     // push stamp book object
                     ret.push(stamp_books[i]);
                 }
