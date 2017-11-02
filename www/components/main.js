@@ -283,15 +283,23 @@ ons.bootstrap()
         service.getStampBooksByTag = function(tag) {
             var search_tag = tag;
             var stamp_books = service.getStampBooks();
-            var ret = [];
-            for(var i = 0; i < stamp_books.length; i++) {
-                // <TODO> 部分一致にしたい
-                if (stamp_books[i].tags.indexOf(search_tag) != -1) {
-                    // push stamp book object
-                    ret.push(stamp_books[i]);
-                }
+            var mutch_stamp_books = [];
+
+            if (search_tag == "") {
+                return stamp_books
             }
-            return ret;
+            var mutch_stamp_books = stamp_books.filter(function(stamp, index) {
+                var mutch_tag = 0;
+                mutch_tag = stamp.tags.filter(function(tag, index) {
+                    if(tag.indexOf(search_tag) >= 0) {
+                        return true;
+                    }
+                });
+                if (mutch_tag != 0) {
+                    return true;
+                }
+            });
+            return mutch_stamp_books;
         };
 
         service.getStampBooks = function() {
