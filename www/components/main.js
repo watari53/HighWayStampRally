@@ -1,7 +1,7 @@
 // This is a JavaScript file
 
 var DUMMY_IMAGE = "./images/no-image.jpg";
-var DATA_FILE = "./data/data.json";
+var DATA_FILE = "./data/kanazawaOpenData.json";
 var UPDATE_DATA_FILE = "./data/data-update.json";
 var app = {};
 
@@ -21,7 +21,7 @@ ons.bootstrap()
                     "memo"           : "メロンパンが名物",
                     "tags"           : ["歴史","文化", "海老名SA"],
                     "get_date"       : null,
-                    "stamp_book_id"  : 0,
+                    "stamp_book_id"  : [0, 1],
                     "stamp_book_name": "東名高速道路",
                 }, {
                     "id"             : 1,
@@ -33,7 +33,7 @@ ons.bootstrap()
                     "memo"           : "カレーパンが名物",
                     "tags"           : ["スポーツ","グルメ", "足柄SA"],
                     "get_date"       : "2017-6-20",
-                    "stamp_book_id"  : 0,
+                    "stamp_book_id"  : [0, 1],
                     "stamp_book_name": "東名高速道路",
                 }, {
                     "id"             : 2,
@@ -45,7 +45,7 @@ ons.bootstrap()
                     "memo"           : "こっぺパンが名物",
                     "tags"           : ["スポーツ","グルメ", "談合坂SA"],
                     "get_date"       : null,
-                    "stamp_book_id"  : 1,
+                    "stamp_book_id"  : [1, 2],
                     "stamp_book_name": "中央自動車道",
                 }, {
                     "id"             : 3,
@@ -57,7 +57,7 @@ ons.bootstrap()
                     "memo"           : "レーズンパンが名物",
                     "tags"           : ["スポーツ","PA", "石川PA"],
                     "get_date"       : null,
-                    "stamp_book_id"  : 1,
+                    "stamp_book_id"  : [1, 2],
                     "stamp_book_name": "中央自動車道",
                 }, {
                     "id"             : 4,
@@ -70,7 +70,7 @@ ons.bootstrap()
                     "tags"           : ["おやつ", "東京ラスク"],
                     "get_date"       : null,
                     "get_date"       : "2017-09-10",
-                    "stamp_book_id"  : 2,
+                    "stamp_book_id"  : [2],
                     "stamp_book_name": "これだけは行きたい！東京の旅",
                 }, {
                     "id"             : 5,
@@ -82,7 +82,7 @@ ons.bootstrap()
                     "memo"           : "レーズンパンが名物",
                     "tags"           : ["おやつ", "東京ばなな"],
                     "get_date"       : null,
-                    "stamp_book_id"  : 2,
+                    "stamp_book_id"  : [2],
                     "stamp_book_name": "これだけは行きたい！東京の旅",
                 }, {
                     "id"             : 6,
@@ -94,7 +94,7 @@ ons.bootstrap()
                     "memo"           : "イチゴが名物",
                     "tags"           : ["おやつ", "東京いちご"],
                     "get_date"       : null,
-                    "stamp_book_id"  : 2,
+                    "stamp_book_id"  : [2],
                     "stamp_book_name": "これだけは行きたい！東京の旅",
                 }],
 
@@ -172,22 +172,22 @@ ons.bootstrap()
 
         }
         // set sample data
-        set_sample_data();
+        // set_sample_data();
         // set data from data.json
-        // var deployFlag = localStorage.getItem("deployFlag")
-        // console.log(deployFlag);
-        // if (deployFlag == null) {
-        //     console.log("first deploy");
-        //     $http.get(DATA_FILE).then(function(response) {
-        //         var data = response.data;
-        //         localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
-        //         localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
-        //         localStorage.setItem("deployFlag", true);
-        //         update_data();
-        //     });
-        // } else {
-        //     update_data();
-        // }
+        var deployFlag = localStorage.getItem("deployFlag")
+        console.log(deployFlag);
+        if (deployFlag == null) {
+            console.log("first deploy");
+            $http.get(DATA_FILE).then(function(response) {
+                var data = response.data;
+                localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
+                localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
+                localStorage.setItem("deployFlag", true);
+                update_data();
+            });
+        } else {
+            update_data();
+        }
         // test to set data
         // var stamps = localStorage.getItem("stamps");
         // alert(JSON.parse(stamps)[0].name);
@@ -304,8 +304,10 @@ ons.bootstrap()
             var stamp_book_id = id;
             var stamps = service.getStampData();
             for (key in stamps) {
-                if (stamps[key].stamp_book_id == stamp_book_id) {
-                    ret_stamps.push(stamps[key]);
+                for (var i=0; i < stamps[key].stamp_book_id.length; i++) {
+                    if (stamps[key].stamp_book_id[i] == stamp_book_id) {
+                        ret_stamps.push(stamps[key]);
+                    }
                 }
             }
             return ret_stamps;

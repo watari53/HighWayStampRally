@@ -7,9 +7,10 @@
                     "lng"            : 139.401082,
                     "address"        : "神奈川県川崎市中原区宮内1-3-3",
                     "image_url"      : "./images/no-image.jpg",
+                    "tags"           : ["おやつ", "東京ラスク", "東京ばなな","東京イチゴ"],
                     "memo"           : "updated",
                     "get_date"       : "",
-                    "stamp_book_id"  : 0,
+                    "stamp_book_id"  : [0, 1],
                     "stamp_book_name": "to-mei high way"
             },
             {
@@ -21,7 +22,7 @@
                     "image_url"      : "./images/dummy-image.jpg",
                     "memo"           : "カレーパンが名物",
                     "get_date"       : "2017-6-20",
-                    "stamp_book_id"  : 0,
+                    "stamp_book_id"  : [0, 1],
                     "stamp_book_name": "to-mei high way"
             },
             {
@@ -34,7 +35,7 @@
                     "memo"           : "add",
                     "tags"           : ["神奈川県", "SA"],
                     "get_date"       : "",
-                    "stamp_book_id"  : 4,
+                    "stamp_book_id"  : [1, 4],
                     "stamp_book_name": "新しいスタンプブック"
             },
             {
