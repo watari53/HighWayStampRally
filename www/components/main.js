@@ -724,9 +724,11 @@ ons.bootstrap()
             console.log("set markers");
             var stamps = DataService.getStampData();
             for (var i = 0; i < stamps.length; i++) {
-                f = stamps[i];
-                L.marker([f.lat, f.lng]).addTo(map)
-                    .bindPopup(f.name);
+                if (stamps[i].get_date != null) {
+                    f = stamps[i];
+                    L.marker([f.lat, f.lng]).addTo(map)
+                        .bindPopup(f.name);
+                }
             }
         }
     });
