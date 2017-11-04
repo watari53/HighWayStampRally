@@ -57,14 +57,19 @@
             {
                     "id"            : 0,
                     "name"          : "to-mei high way",
-                    "image_url"     : "./images/dummy-image.jpg"
+                    "image_url"     : "./images/dummy-image.jpg",
+                    "time_required" : "1.5h",
+                    "distance"      : "2.2km",
+                    "all_stamps_num": 2
             },{
                     "id"            : 4,
                     "name"          : "新しいスタンプブック",
                     "all_stamps_num": 1,
                     "get_stamp_num" : 0,
                     "image_url"     : "./images/dummy-image.jpg",
-                    "tags"           : ["神奈川県", "SA"],
+                    "tags"          : ["神奈川県", "SA"],
+                    "time_required" : "1.5h",
+                    "distance"      : "2.2km",
                     "active_flg"    : false
             }]
 }

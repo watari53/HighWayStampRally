@@ -74,6 +74,26 @@
   padding-top:80%;
 }
 
+/* stamp book detail */
+.info-col {
+  height: 60px;
+  line-height: 1;
+  padding: 12px 0 12px 4px;
+}
+
+.info-num {
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.info-unit {
+  margin-top: 6px;
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+
 /* facility detail */
 .detail-image {
   /*background: url('bg.png') 0 0 no-repeat;*/

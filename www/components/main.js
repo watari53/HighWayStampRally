@@ -105,6 +105,8 @@ ons.bootstrap()
                     "get_stamp_num" : 1,
                     "image_url"     : "./images/dummy-image.jpg",
                     "tags"          : ["歴史","文化", "海老名SA", "スポーツ","グルメ", "足柄SA"],
+                    "time_required"  : "1.5h",
+                    "distance"      : "2.2km",
                     "active_flg": true,
                 }, {
                     "id"            : 1,
@@ -113,6 +115,8 @@ ons.bootstrap()
                     "get_stamp_num" : 0,
                     "image_url"     : "./images/dummy-image.jpg",
                     "tags"          : ["スポーツ","グルメ", "談合坂SA", "PA", "石川PA"],
+                    "time_required"  : "1.5h",
+                    "distance"      : "2.2km",
                     "active_flg": false,
                 }, {
                     "id"            : 2,
@@ -121,6 +125,8 @@ ons.bootstrap()
                     "get_stamp_num" : 1,
                     "image_url"     : "./images/dummy-image.jpg",
                     "tags"          : ["おやつ", "東京ラスク", "東京ばなな","東京イチゴ"],
+                    "time_required" : "1.5h",
+                    "distance"      : "2.2km",
                     "active_flg": true,
                 }]
             };
@@ -154,7 +160,7 @@ ons.bootstrap()
                 }
                 // update stamp books
                 for (var i = 0; i < update_stamp_books.length; i++) {
-                    var UPDATE_DATA_KEY = ["name", "all_stamps_num"];
+                    var UPDATE_DATA_KEY = ["name", "all_stamps_num", "time_required"];
                     var update_target_stamp_book = service.getStampBookById(update_stamp_books[i].id);
                     // if target sample_data exist, update stamp_book data
                     if (update_target_stamp_book) {
@@ -172,7 +178,7 @@ ons.bootstrap()
 
         }
         // set sample data
-        // set_sample_data();
+        set_sample_data();
         // set data from data.json
         var deployFlag = localStorage.getItem("deployFlag")
         console.log(deployFlag);

@@ -1,5 +1,5 @@
-    <!DOCTYPE HTML>
-    <html>
+<!DOCTYPE HTML>
+<html>
 
     <head>
         <meta charset="utf-8">
@@ -271,6 +271,25 @@
                     <div id="stamp_book_detail_map" style="margin: 0 10px 10px 10px; height: 40%; position: relative;" tabindex="0";> </div>
 
                 <ons-list>
+                  <ons-list-item>
+                    <ons-row>
+                      <ons-col class="info-col">
+                        <div class="info-num">{{stamp_book.time_required}}</div>
+                        <div class="info-unit">所要時間</div>
+                      </ons-col>
+                      <ons-col class="info-col">
+                        <div class="info-num">{{stamp_book.distance}}</div>
+                        <div class="info-unit">総距離</div>
+                      </ons-col>
+                      <ons-col class="info-col">
+                        <div class="info-num">{{stamp_book.all_stamps_num}}箇所</div>
+                        <div class="info-unit">スタンプ数</div>
+                      </ons-col>
+                    </ons-row>
+                  </ons-list-item>
+                </ons-list>
+
+                <ons-list>
 
                     <ons-list-header class="title">スタンプ一覧</ons-list-header>
                     <ons-list-item modifier="chevron" class="list-item-container" ng-repeat='stamp in stamps'>
@@ -391,4 +410,4 @@
 
     </body>
 
-    </html>
+</html>
