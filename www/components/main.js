@@ -3,6 +3,8 @@
 var DUMMY_IMAGE = "./images/no-image.jpg";
 var DATA_FILE = "./data/kanazawaOpenData.json";
 var UPDATE_DATA_FILE = "./data/data-update.json";
+var STAMP_UPDATE_DATA_KEY = ["name", "lat", "lng", "address", "stamp_book_id", "stamp_book_name"];
+var STAMP_BOOK_UPDATE_DATA_KEY = ["name", "all_stamps_num", "time_required"];
 var app = {};
 
 ons.bootstrap()
@@ -128,10 +130,13 @@ ons.bootstrap()
                     "time_required" : "1.5h",
                     "distance"      : "2.2km",
                     "active_flg": true,
-                }]
+                }],
+
+                "TagList": ["おやつ", "東京ラスク", "東京ばなな", "東京イチゴ", "スポーツ", "グルメ"],
             };
             localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
             localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
+            localStorage.setItem("TagList", JSON.stringify(data.TagList));
             update_data();
             showProcessingModal.hide();
         }
@@ -140,9 +145,11 @@ ons.bootstrap()
             console.log("data update");
             $http.get(UPDATE_DATA_FILE).then(function(response) {
                 console.log("data update");
-                var UPDATE_DATA_KEY = ["name", "lat", "lng", "address", "stamp_book_id", "stamp_book_name"];
+                var UPDATE_DATA_KEY = STAMP_UPDATE_DATA_KEY;
                 var update_stamps = response.data.Stamps; //update用データ
                 var update_stamp_books = response.data.StampBooks; //update用データ
+                var update_tag_list = response.data.TagList; //update用データ
+                console.log("update tag: " + update_tag_list);
                 // update stamps
                 for (var i = 0; i < update_stamps.length; i++) {
                     var update_target_stamp = service.getStampById(update_stamps[i].id);  //updateされるデータ
@@ -160,7 +167,7 @@ ons.bootstrap()
                 }
                 // update stamp books
                 for (var i = 0; i < update_stamp_books.length; i++) {
-                    var UPDATE_DATA_KEY = ["name", "all_stamps_num", "time_required"];
+                    var UPDATE_DATA_KEY = STAMP_BOOK_UPDATE_DATA_KEY;
                     var update_target_stamp_book = service.getStampBookById(update_stamp_books[i].id);
                     // if target sample_data exist, update stamp_book data
                     if (update_target_stamp_book) {
@@ -173,21 +180,25 @@ ons.bootstrap()
                         service.addStampBookData(update_stamp_books[i]);
                     }
                 }
+                // update tag list
+                service.setTagList(update_tag_list);
+
                 showProcessingModal.hide();
             });
 
         }
         // set sample data
-        set_sample_data();
+        // set_sample_data();
         // set data from data.json
         var deployFlag = localStorage.getItem("deployFlag")
         console.log(deployFlag);
-        if (deployFlag == null) {
+        if (deployFlag != null) {
             console.log("first deploy");
             $http.get(DATA_FILE).then(function(response) {
                 var data = response.data;
                 localStorage.setItem("Stamps", JSON.stringify(data.Stamps));
                 localStorage.setItem("StampBooks", JSON.stringify(data.StampBooks));
+                localStorage.setItem("TagList", JSON.stringify(data.TagList));
                 localStorage.setItem("deployFlag", true);
                 update_data();
             });
@@ -289,23 +300,27 @@ ons.bootstrap()
         service.getStampBooksByTag = function(tag) {
             var search_tag = tag;
             var stamp_books = service.getStampBooks();
-            var mutch_stamp_books = [];
+            var match_stamp_books = [];
 
             if (search_tag == "") {
                 return stamp_books
             }
-            var mutch_stamp_books = stamp_books.filter(function(stamp, index) {
-                var mutch_tag = 0;
-                mutch_tag = stamp.tags.filter(function(tag, index) {
+            var match_stamp_books = stamp_books.filter(function(stamp, index) {
+                var match_tag = 0;
+                match_tag = stamp.tags.filter(function(tag, index) {
                     if(tag.indexOf(search_tag) >= 0) {
                         return true;
                     }
                 });
-                if (mutch_tag != 0) {
+                if (match_tag != 0) {
                     return true;
                 }
             });
-            return mutch_stamp_books;
+            if (match_stamp_books.length == 0) {
+                console.log("no match stamp book exist");
+                match_stamp_books[0] = "条件に当てはまるスタンプラリーがありません"
+            }
+            return match_stamp_books;
         };
 
         service.getStampBooks = function() {
@@ -326,6 +341,17 @@ ons.bootstrap()
             }
             return ret_stamps;
         };
+
+        service.getTagList = function() {
+            console.log("get tag list: return array");
+            return JSON.parse(localStorage.getItem("TagList"));
+        }
+
+        service.setTagList = function(tag_list) {
+            console.log("set tag list: set array");
+            localStorage.setItem("TagList", JSON.stringify(tag_list));
+        }
+
         return service;
     })
     .factory('CommonService', function() {
@@ -423,6 +449,16 @@ ons.bootstrap()
             $scope.$apply(); //画像を反映
         });
 
+        // create autocomplete data list
+        var tag_list = DataService.getTagList();
+        var datalist = document.getElementById('tag_list');
+        tag_list.forEach(function(tag){
+            var option = document.createElement('option');
+            option.value = tag;
+            datalist.appendChild(option);
+        });
+
+        // go StampDetailController
         $scope.go_stamps = function(stamp_book) {
             var stamp_book = stamp_book;
             nav.pushPage('stamps.html', {data : {stamp_book: stamp_book}});

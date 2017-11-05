@@ -1,75 +1,88 @@
 {
-        "Stamps": [
-            {
-                    "id"             : 0,
-                    "name"           : "ebina SA",
-                    "lat"            : 35.431248,
-                    "lng"            : 139.401082,
-                    "address"        : "神奈川県川崎市中原区宮内1-3-3",
-                    "image_url"      : "./images/no-image.jpg",
-                    "tags"           : ["おやつ", "東京ラスク", "東京ばなな","東京イチゴ"],
-                    "memo"           : "updated",
-                    "get_date"       : "",
-                    "stamp_book_id"  : [0, 1],
-                    "stamp_book_name": "to-mei high way"
-            },
-            {
-                    "id"             : 1,
-                    "name"           : "足柄SA update",
-                    "lat"            : 35.313659,
-                    "lng"            : 138.966701,
-                    "address"        : "神奈川県川崎市中原区宮内1-3-3",
-                    "image_url"      : "./images/dummy-image.jpg",
-                    "memo"           : "カレーパンが名物",
-                    "get_date"       : "2017-6-20",
-                    "stamp_book_id"  : [0, 1],
-                    "stamp_book_name": "to-mei high way"
-            },
-            {
-                    "id"             : 7,
-                    "name"           : "ebina SA2",
-                    "lat"            : 35.431240,
-                    "lng"            : 139.401042,
-                    "address"        : "神奈川県川崎市中原区宮内1-3-3",
-                    "image_url"      : "./images/no-image.jpg",
-                    "memo"           : "add",
-                    "tags"           : ["神奈川県", "SA"],
-                    "get_date"       : "",
-                    "stamp_book_id"  : [1, 4],
-                    "stamp_book_name": "新しいスタンプブック"
-            },
-            {
-                    "id"             : 8,
-                    "name"           : "ebina SA3",
-                    "lat"            : 35.431040,
-                    "lng"            : 139.402042,
-                    "address"        : "神奈川県川崎市中原区宮内1-3-4",
-                    "image_url"      : "./images/no-image.jpg",
-                    "memo"           : "add",
-                    "tags"           : ["神奈川県", "SA"],
-                    "get_date"       : "",
-                    "stamp_book_id"  : 4,
-                    "stamp_book_name": "新しいスタンプブック"
-            }
-        ],
+    "Stamps": [
+        {
+                "id"             : 0,
+                "name"           : "ebina SA",
+                "lat"            : 35.431248,
+                "lng"            : 139.401082,
+                "address"        : "神奈川県川崎市中原区宮内1-3-3",
+                "image_url"      : "./images/no-image.jpg",
+                "tags"           : ["おやつ", "東京ラスク", "東京ばなな","東京イチゴ"],
+                "memo"           : "updated",
+                "get_date"       : "",
+                "stamp_book_id"  : [0, 1],
+                "stamp_book_name": "to-mei high way"
+        },
+        {
+                "id"             : 1,
+                "name"           : "足柄SA update",
+                "lat"            : 35.313659,
+                "lng"            : 138.966701,
+                "address"        : "神奈川県川崎市中原区宮内1-3-3",
+                "image_url"      : "./images/dummy-image.jpg",
+                "memo"           : "カレーパンが名物",
+                "get_date"       : "2017-6-20",
+                "stamp_book_id"  : [0, 1],
+                "stamp_book_name": "to-mei high way"
+        },
+        {
+                "id"             : 7,
+                "name"           : "ebina SA2",
+                "lat"            : 35.431240,
+                "lng"            : 139.401042,
+                "address"        : "神奈川県川崎市中原区宮内1-3-3",
+                "image_url"      : "./images/no-image.jpg",
+                "memo"           : "add",
+                "tags"           : ["神奈川県", "SA"],
+                "get_date"       : "",
+                "stamp_book_id"  : [1, 4],
+                "stamp_book_name": "新しいスタンプブック"
+        },
+        {
+                "id"             : 8,
+                "name"           : "ebina SA3",
+                "lat"            : 35.431040,
+                "lng"            : 139.402042,
+                "address"        : "神奈川県川崎市中原区宮内1-3-4",
+                "image_url"      : "./images/no-image.jpg",
+                "memo"           : "add",
+                "tags"           : ["神奈川県", "SA"],
+                "get_date"       : "",
+                "stamp_book_id"  : 4,
+                "stamp_book_name": "新しいスタンプブック"
+        }
+    ],
 
-        "StampBooks": [
-            {
-                    "id"            : 0,
-                    "name"          : "to-mei high way",
-                    "image_url"     : "./images/dummy-image.jpg",
-                    "time_required" : "1.5h",
-                    "distance"      : "2.2km",
-                    "all_stamps_num": 2
-            },{
-                    "id"            : 4,
-                    "name"          : "新しいスタンプブック",
-                    "all_stamps_num": 1,
-                    "get_stamp_num" : 0,
-                    "image_url"     : "./images/dummy-image.jpg",
-                    "tags"          : ["神奈川県", "SA"],
-                    "time_required" : "1.5h",
-                    "distance"      : "2.2km",
-                    "active_flg"    : false
-            }]
+    "StampBooks": [
+        {
+                "id"            : 0,
+                "name"          : "to-mei high way",
+                "image_url"     : "./images/dummy-image.jpg",
+                "time_required" : "1.5h",
+                "distance"      : "2.2km",
+                "all_stamps_num": 2
+        },{
+                "id"            : 4,
+                "name"          : "新しいスタンプブック",
+                "all_stamps_num": 1,
+                "get_stamp_num" : 0,
+                "image_url"     : "./images/dummy-image.jpg",
+                "tags"          : ["神奈川県", "SA"],
+                "time_required" : "1.5h",
+                "distance"      : "2.2km",
+                "active_flg"    : false
+    }],
+
+    "TagList": [
+        "文化・芸術", 
+        "坂道標柱一覧", 
+        "観光", 
+        "歴史・文化施設", 
+        "その他", 
+        "庭園・公園", 
+        "美術館・博物館", 
+        "歴史のまちしるべ標柱一覧", 
+        "寺社",
+        "update"
+    ]
 }

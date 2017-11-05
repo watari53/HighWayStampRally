@@ -205,7 +205,10 @@
                       </div>
                     </div>
 
-                    <input type="search" id="search-stamp-book" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="input keyword">
+                    <input type="search" id="search-stamp-book" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="input keyword" autocomplete="on" list="tag_list">
+                    <!-- append child by main.js -->
+                    <datalist id="tag_list">
+                    </datalist>
 
                     <ons-list>
                         <div id="activated">
