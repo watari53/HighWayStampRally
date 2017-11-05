@@ -72,7 +72,7 @@
                     </div>
                 </ons-toolbar>
                 <div class="content" style="text-align: center">
-                    <img id="top-image" src="./images/top-image.jpg"></img>
+                    <img id="top-image" src="./images/top-image.jpg">
                     <p style="text-align: center; opacity: 0.6; padding-top: 10px;">
                         スタンプラリーで巡る
                         <br>日本の観光スポット
@@ -102,7 +102,7 @@
                             <div class="left">
                                 <img class="list-item__thumbnail" src="./images/footprint.png">
                             </div>
-                            <div class="center"ｋｋ
+                            <div class="center">
                                 <span class="list-item__title">足跡マップ</span>
                                 <span class="list-item__subtitle">軌跡を地図で振り返る</span>
                             </div>
@@ -213,7 +213,7 @@
                     <ons-list>
                         <div id="activated">
                             <ons-list-header> 未参加のスタンプラリー一覧 </ons-list-header>
-                            <ons-list-item modifier="chevron" ng-repeat="stamp_book in stamp_books | filter : {active_flg: false} | limitTo: 50">
+                            <ons-list-item modifier="chevron" ng-repeat="stamp_book in stamp_books | filter : {active_flg: false} | limitTo: 50" tappable>
                                 <div class="left">
                                     <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
                                     <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
@@ -228,7 +228,7 @@
 
                         <div id="inactivated" style="display: none;">
                             <ons-list-header> 参加済みのスタンプラリー一覧 </ons-list-header>
-                            <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)" ng-repeat="stamp_book in stamp_books | filter : {active_flg: true}">
+                            <ons-list-item modifier="chevron" ng-click="go_stamps(stamp_book)" ng-repeat="stamp_book in stamp_books | filter : {active_flg: true}" tappable>
                                 <div class="left">
                                     <!-- <div class="list-item__thumbnail" style="background-image: url({{stamp_book.image_url}});"> </div> -->
                                     <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
@@ -271,25 +271,26 @@
                     </ons-list-item>
                 </ons-list>
 
-                    <div id="stamp_book_detail_map" style="margin: 0 10px 10px 10px; height: 40%; position: relative;" tabindex="0";> </div>
+                <div id="stamp_book_detail_map" style="margin: 0 10px 10px 10px; height: 40%; position: relative;" tabindex="0";> </div>
 
                 <ons-list>
-                  <ons-list-item>
-                    <ons-row>
-                      <ons-col class="info-col">
-                        <div class="info-num">{{stamp_book.time_required}}</div>
-                        <div class="info-unit">所要時間</div>
-                      </ons-col>
-                      <ons-col class="info-col">
-                        <div class="info-num">{{stamp_book.distance}}</div>
-                        <div class="info-unit">総距離</div>
-                      </ons-col>
-                      <ons-col class="info-col">
-                        <div class="info-num">{{stamp_book.all_stamps_num}}箇所</div>
-                        <div class="info-unit">スタンプ数</div>
-                      </ons-col>
-                    </ons-row>
-                  </ons-list-item>
+                    <ons-list-header class="title">データ</ons-list-header>
+                    <ons-list-item>
+                        <ons-row>
+                          <ons-col class="info-col">
+                            <div class="info-num">{{stamp_book.time_required}}</div>
+                            <div class="info-unit">所要時間</div>
+                          </ons-col>
+                          <ons-col class="info-col">
+                            <div class="info-num">{{stamp_book.distance}}</div>
+                            <div class="info-unit">総距離</div>
+                          </ons-col>
+                          <ons-col class="info-col">
+                            <div class="info-num">{{stamp_book.all_stamps_num}}箇所</div>
+                            <div class="info-unit">スタンプ数</div>
+                          </ons-col>
+                        </ons-row>
+                    </ons-list-item>
                 </ons-list>
 
                 <ons-list>
@@ -345,11 +346,18 @@
                     <ons-list-header class="title">Information</ons-list-header>
                     <ons-list-item>
                         <div class="left">
+                            <ons-icon icon="fa-edit"></ons-icon>
+                        </div>
+                        <div class="center">
+                            {{stamp.memo}}
+                        </div>
+                    </ons-list-item>
+                    <ons-list-item>
+                        <div class="left">
                             <ons-icon icon="fa-map-marker"></ons-icon>
                         </div>
                         <div class="center">
                             {{stamp.address}}
-
                         </div>
                     </ons-list-item>
                     <ons-list-item>
@@ -366,7 +374,6 @@
                         </div>
                         <div class="center">
                             {{stamp.stamp_book_name}}
-
                         </div>
                     </ons-list-item>
                 </ons-list>
